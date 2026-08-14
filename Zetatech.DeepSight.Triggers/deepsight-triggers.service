@@ -1,0 +1,21 @@
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/dotnet Zetatech.DeepSight.Triggers.dll
+Group=ssl-cert
+Restart=always
+RestartSec=10
+SyslogIdentifier=Zetatech.DeepSight.Triggers
+Type=simple
+User=deepsight
+WorkingDirectory=/usr/share/deepsight/triggers
+
+Environment=DOTNET_CLI_TELEMETRY_OPTOUT=1
+Environment=DOTNET_ENVIRONMENT=Production
+Environment=DOTNET_NOLOGO=1
+Environment=DOTNET_ROOT=/usr/share/dotnet
+
+[Unit]
+After=network.target postgresql.service rabbitmq-server.service
+Description=DeepSight ingestion api

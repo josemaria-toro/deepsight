@@ -1,0 +1,108 @@
+{
+    "inputs": [
+        {
+            "default": "Release",
+            "description": "Choose the build configuration",
+            "id": "build-config",
+            "options": [
+                "Debug",
+                "Release"
+            ],
+            "type": "pickString"
+        }
+    ],
+    "tasks": [
+        {
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "group": {
+                "isDefault": false,
+                "kind": "none"
+            },
+            "hide": true,
+            "label": "cleanup",
+            "linux": {
+                "command": "find .nuget/packages -mindepth 1 -maxdepth 1 -exec rm -rf {} +"
+            },
+            "problemMatcher": [],
+            "type": "shell"
+        },
+        {
+            "command": "dotnet-outdated --maximum-version 10.0 --no-restore --recursive --upgrade:auto --version-lock none Zetatech.DeepSight.sln",
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "group": {
+                "isDefault": false,
+                "kind": "none"
+            },
+            "hide": true,
+            "label": "outdated",
+            "problemMatcher": "$msCompile",
+            "type": "shell"
+        },
+        {
+            "command": "dotnet restore Zetatech.DeepSight.sln --nologo --verbosity normal",
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "group": {
+                "isDefault": false,
+                "kind": "none"
+            },
+            "hide": true,
+            "label": "restore",
+            "problemMatcher": "$msCompile",
+            "type": "shell"
+        },
+        {
+            "command": "dotnet clean Zetatech.DeepSight.sln --configuration ${input:build-config} --nologo --verbosity normal",
+            "dependsOn": [
+                "restore"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "isDefault": false,
+                "kind": "none"
+            },
+            "hide": true,
+            "label": "clean",
+            "problemMatcher": "$msCompile",
+            "type": "shell"
+        },
+        {
+            "command": "dotnet build Zetatech.DeepSight.sln --configuration ${input:build-config} --nologo --no-restore --verbosity normal",
+            "dependsOn": [
+                "clean"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "hide": false,
+            "label": "build",
+            "problemMatcher": "$msCompile",
+            "type": "shell"
+        },
+        {
+            "command": "dotnet pack Zetatech.DeepSight.sln --configuration ${input:build-config} --include-source --include-symbols --nologo --no-restore --output .nuget/feed --verbosity normal",
+            "dependsOn": [
+                "cleanup",
+                "outdated",
+                "build"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "isDefault": false,
+                "kind": "none"
+            },
+            "hide": false,
+            "label": "pack",
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "promptOnClose": false,
+            "type": "shell"
+        }
+    ],
+    "version": "2.0.0"
+}

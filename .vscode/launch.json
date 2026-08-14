@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "args": "",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Zetatech.DeepSight.Api",
+            "name": "DeepSight APIRest",
+            "preLaunchTask": "",
+            "program": "${workspaceFolder}/Zetatech.DeepSight.Api/bin/Debug/net10.0/Zetatech.DeepSight.Api.dll",
+            "request": "launch",
+            "stopAtEntry": false,
+            "type": "coreclr"
+        },
+        {
+            "args": "",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Zetatech.DeepSight.Mcp",
+            "name": "DeepSight Mcp",
+            "preLaunchTask": "",
+            "program": "${workspaceFolder}/Zetatech.DeepSight.Mcp/bin/Debug/net10.0/Zetatech.DeepSight.Mcp.dll",
+            "request": "launch",
+            "stopAtEntry": false,
+            "type": "coreclr"
+        },
+        {
+            "args": "",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Zetatech.DeepSight.Triggers",
+            "name": "DeepSight Triggers",
+            "preLaunchTask": "",
+            "program": "${workspaceFolder}/Zetatech.DeepSight.Triggers/bin/Debug/net10.0/Zetatech.DeepSight.Triggers.dll",
+            "request": "launch",
+            "stopAtEntry": false,
+            "type": "coreclr"
+        }
+    ],
+    "version": "0.2.0"
+}

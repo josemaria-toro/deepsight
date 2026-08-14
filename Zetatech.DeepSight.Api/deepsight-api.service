@@ -1,0 +1,21 @@
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/dotnet Zetatech.DeepSight.Api.dll
+Group=ssl-cert
+Restart=always
+RestartSec=10
+SyslogIdentifier=Zetatech.DeepSight.Api
+Type=simple
+User=deepsight
+WorkingDirectory=/usr/share/deepsight/api
+
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_CLI_TELEMETRY_OPTOUT=1
+Environment=DOTNET_NOLOGO=1
+Environment=DOTNET_ROOT=/usr/share/dotnet
+
+[Unit]
+After=network.target rabbitmq-server.service
+Description=DeepSight ingestion api

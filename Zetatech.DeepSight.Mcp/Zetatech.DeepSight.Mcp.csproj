@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <AnalysisLevel>5.0</AnalysisLevel>
+        <AssemblyName>Zetatech.DeepSight.Mcp</AssemblyName>
+        <AssemblyOriginatorKeyFile>$(SolutionDir)/Signature.snk</AssemblyOriginatorKeyFile>
+        <AssemblyTitle>Web sockets application to support MCP clients integration</AssemblyTitle>
+        <AssemblyVersion>10.2609.0</AssemblyVersion>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <Authors>Zeta Technologies</Authors>
+        <CodeAnalysisOutputToConsole>true</CodeAnalysisOutputToConsole>
+        <Company>Zeta Technologies</Company>
+        <Configurations>Debug;Release</Configurations>
+        <ContentTargetFolders>content</ContentTargetFolders>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <Copyright>Zeta Technologies © 2026</Copyright>
+        <Description>Web sockets application to support MCP clients integration</Description>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <FileVersion>10.2609.0</FileVersion>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <InformationalVersion>10.2609.0</InformationalVersion>
+        <IsPackable>false</IsPackable>
+        <IsPublishable>true</IsPublishable>
+        <IsTestProject>false</IsTestProject>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <Nullable>disable</Nullable>
+        <OutputType>exe</OutputType>
+        <Product>DeepSight Platform</Product>
+        <PublishDocumentationFile>false</PublishDocumentationFile>
+        <PublishDocumentationFiles>false</PublishDocumentationFiles>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/josemaria-toro/deepsight.git</RepositoryUrl>
+        <RootNamespace>Zetatech.DeepSight</RootNamespace>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+        <RunCodeAnalysis>false</RunCodeAnalysis>
+        <SignAssembly>true</SignAssembly>
+        <TargetFramework>net10.0</TargetFramework>
+        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>portable</DebugType>
+        <DefineDebug>true</DefineDebug>
+        <DefineTrace>true</DefineTrace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DebugSymbols>false</DebugSymbols>
+        <DebugType>portable</DebugType>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Application/Zetatech.DeepSight.Application.csproj" />
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Domain/Zetatech.DeepSight.Domain.csproj" />
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Infrastructure/Zetatech.DeepSight.Infrastructure.csproj" />
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Logging/Zetatech.DeepSight.Logging.csproj" />
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Telemetry/Zetatech.DeepSight.Telemetry.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="ModelContextProtocol" Version="2.1.0" />
+    </ItemGroup>
+</Project>
