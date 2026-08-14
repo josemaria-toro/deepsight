@@ -5,7 +5,10 @@ Librería perteneciente a la plataforma **Zetatech DeepSight**, desarrollada por
 ```
 ├─ Zetatech
    ├─ DeepSight
-      ├─ DependencyInjection      ' Métodos de extensión para el registro de los proveedores de logging.
+      ├─ DependencyInjection      ' Métodos de extensión para el registro de componentes en el contenedor de dependencias.
+      ├─ Logging                  ' Clases especializadas para el registro de actividad de diagnóstico.
+         ├─ Dtos                  ' Clases utilizadas como entrada, en las llamadas a la api de ingesta.
+         ├─ Providers             ' Proveedores para crear instancias especializadas para el registro de actividad de diagnóstico.
 ```
 ## Configuración
 ``` json
@@ -13,14 +16,19 @@ Librería perteneciente a la plataforma **Zetatech DeepSight**, desarrollada por
    "logging": {
       "deepSight": {
          "appName": "",
-         "appVersion": "x.x.x",
+         "appVersion": "", // Version in format major.minor.revision
          "logLevel": "debug | information | warning | error | critical",
-         "tenant": "",
          "url": ""
+      },
+      "logLevel": {
+         "deepSight": "information"
       }
    }
 }
 ```
 ## Control de versiones
 ### v10.2609.0
-- Implementación especializada para el envío de información al sistema DeepSight.
+- Se incluye la clase para la configuración del logger especializado en el sistema DeepSight.
+- Se incluye la clase especializada que realiza el registro de la actividad de diagnóstico de las aplicaciones en el sistema DeepSight.
+- Se incluye el proveedor para crear instancias especializadas para el registro de actividad de diagnóstico en el sistema DeepSight.
+- Se incluyen los DTOs, que son utilizados como entrada en las llamadas a la api de ingesta.

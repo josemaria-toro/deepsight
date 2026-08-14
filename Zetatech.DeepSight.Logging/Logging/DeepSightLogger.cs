@@ -12,7 +12,7 @@ using Zetatech.Accelerate.Serialization;
 
 namespace Zetatech.DeepSight.Logging;
 
-internal sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
+public sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
 {
     private readonly HttpClient _httpClient;
 
@@ -52,7 +52,6 @@ internal sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
             };
 
             TrackException(logLevel, exception, loggerDto, traceSpan);
-            TrackScopes(logLevel, loggerDto, traceSpan);
             TrackTrace(logLevel, $"{state}", loggerDto, traceSpan);
         }
         }
@@ -92,17 +91,6 @@ internal sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
             {
                 exception = exception.InnerException;
             }
-        }
-    }
-    private void TrackScopes(LogLevel logLevel,
-                             DeepSightLoggerDto deepSightLoggerDto,
-                             String traceSpan)
-    {
-        var scopes = GetScopeInfo();
-
-        foreach (var scope in scopes)
-        {
-            TrackTrace(logLevel, scope, deepSightLoggerDto, traceSpan);
         }
     }
     private void TrackTrace(LogLevel logLevel,

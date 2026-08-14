@@ -44,7 +44,7 @@ public sealed class EventsService : BaseDeepSightService, IEventsService
     public override async Task DeleteAsync(UInt32 daysToKeep,
                                            CancellationToken cancellationToken = default)
     {
-        await _eventsRepository.DeleteAsync(x => x.Timestamp.Date < DateTime.UtcNow.AddDays(-daysToKeep), cancellationToken)
+        await _eventsRepository.DeleteAsync(x => x.Timestamp.Date < DateTime.UtcNow.Date.AddDays(-daysToKeep), cancellationToken)
                                .ConfigureAwait(false);
     }
     public async Task<IList<EventDto>> GetAsync(CancellationToken cancellationToken = default)

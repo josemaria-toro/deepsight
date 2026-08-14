@@ -21,18 +21,17 @@ public class Program
                            .AddConsoleLoggerProviderOptions()
                            .AddDomainRepositories()
                            .AddDomainRepositoriesOptions()
-                           .AddMessageSubscribers()
-                           .AddRabbitMQChannelFactory();
+                           .AddJobs();
 
         var app = appBuilder.Build();
 
         await app.StartAsync()
                  .ConfigureAwait(false);
-        await app.SubscribeAsync()
+        await app.StartJobsAsync()
                  .ConfigureAwait(false);
         await app.WaitForShutdownAsync()
                  .ConfigureAwait(false);
-        await app.UnsubscribeAsync()
+        await app.StopJobsAsync()
                  .ConfigureAwait(false);
     }
 }

@@ -14,10 +14,10 @@
         {
             "args": "",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/Zetatech.DeepSight.Mcp",
-            "name": "DeepSight Mcp",
+            "cwd": "${workspaceFolder}/Zetatech.DeepSight.Jobs",
+            "name": "DeepSight Jobs",
             "preLaunchTask": "",
-            "program": "${workspaceFolder}/Zetatech.DeepSight.Mcp/bin/Debug/net10.0/Zetatech.DeepSight.Mcp.dll",
+            "program": "${workspaceFolder}/Zetatech.DeepSight.Jobs/bin/Debug/net10.0/Zetatech.DeepSight.Jobs.dll",
             "request": "launch",
             "stopAtEntry": false,
             "type": "coreclr"

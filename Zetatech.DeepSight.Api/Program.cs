@@ -39,7 +39,9 @@ public class Program
         app.UseMvcFeatures();
         app.UseRateLimitsFeatures();
 
-        await app.StartAsync();
-        await app.WaitForShutdownAsync();
+        await app.StartAsync()
+                 .ConfigureAwait(false);
+        await app.WaitForShutdownAsync()
+                 .ConfigureAwait(false);
     }
 }

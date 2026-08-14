@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Zetatech.DeepSight.Logging.Providers;
 
-internal sealed class DeepSightLoggerProvider : ILoggerProvider
+public sealed class DeepSightLoggerProvider : ILoggerProvider
 {
     private Boolean _disposed;
     private readonly HttpClient _httpClient;
@@ -18,7 +18,11 @@ internal sealed class DeepSightLoggerProvider : ILoggerProvider
     {
         _loggers = new ConcurrentDictionary<String, DeepSightLogger>();
         _options = options ?? throw new ArgumentException("The provided configuration options must be a valid instance", nameof(options));
-        _httpClient = new HttpClient { BaseAddress = _options.Value.Uri };
+        _httpClient = new HttpClient
+        {
+            BaseAddress = _options.Value.Uri,
+            Timeout = TimeSpan.FromSeconds(1)
+        };
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 

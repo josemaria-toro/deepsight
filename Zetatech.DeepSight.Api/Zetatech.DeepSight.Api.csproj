@@ -3,7 +3,7 @@
         <AnalysisLevel>5.0</AnalysisLevel>
         <AssemblyName>Zetatech.DeepSight.Api</AssemblyName>
         <AssemblyOriginatorKeyFile>$(SolutionDir)/Signature.snk</AssemblyOriginatorKeyFile>
-        <AssemblyTitle>Web api application to support the data ingestion, analytics and administration</AssemblyTitle>
+        <AssemblyTitle>Web api application to ingest diagnostics and telemetry data from applications</AssemblyTitle>
         <AssemblyVersion>10.2609.0</AssemblyVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <Authors>Zeta Technologies</Authors>
@@ -13,7 +13,7 @@
         <ContentTargetFolders>content</ContentTargetFolders>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <Copyright>Zeta Technologies © 2026</Copyright>
-        <Description>Web api application to support the data ingestion, analytics and administration</Description>
+        <Description>Web api application to ingest diagnostics and telemetry data from applications</Description>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <EnablePackageValidation>true</EnablePackageValidation>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>

@@ -5,7 +5,8 @@ Librería perteneciente a la plataforma **Zetatech DeepSight**, desarrollada por
 ```
 ├─ Zetatech
    ├─ DeepSight
-      ├─ DependencyInjection      ' Métodos de extensión para el registro de los proveedores de telemetría.
+      ├─ DependencyInjection      ' Métodos de extensión para el registro de componentes en el contenedor de dependencias.
+      ├─ Telemetry                ' Clases especializadas para el registro de actividad de diagnóstico.
 ```
 ## Configuración
 ### DeepSight
@@ -14,8 +15,7 @@ Librería perteneciente a la plataforma **Zetatech DeepSight**, desarrollada por
    "logging": {
       "deepSight": {
          "appName": "",
-         "appVersion": "x.x.x",
-         "tenant": "",
+         "appVersion": "", // Version in format major.minor.revision
          "url": ""
       }
    }

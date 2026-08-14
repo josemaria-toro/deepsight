@@ -44,7 +44,7 @@ public sealed class RequestsService : BaseDeepSightService, IRequestsService
     public override async Task DeleteAsync(UInt32 daysToKeep,
                                            CancellationToken cancellationToken = default)
     {
-        await _requestsRepository.DeleteAsync(x => x.Timestamp.Date < DateTime.UtcNow.AddDays(-daysToKeep), cancellationToken)
+        await _requestsRepository.DeleteAsync(x => x.Timestamp.Date < DateTime.UtcNow.Date.AddDays(-daysToKeep), cancellationToken)
                                  .ConfigureAwait(false);
     }
     public async Task<IList<RequestDto>> GetAsync(CancellationToken cancellationToken = default)

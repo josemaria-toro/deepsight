@@ -3,7 +3,7 @@
         <AnalysisLevel>5.0</AnalysisLevel>
         <AssemblyName>Zetatech.DeepSight.Triggers</AssemblyName>
         <AssemblyOriginatorKeyFile>$(SolutionDir)/Signature.snk</AssemblyOriginatorKeyFile>
-        <AssemblyTitle>Service application with triggers to process DeepSight messages</AssemblyTitle>
+        <AssemblyTitle>Service application for ingestion messages processing</AssemblyTitle>
         <AssemblyVersion>10.2609.0</AssemblyVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <Authors>Zeta Technologies</Authors>
@@ -13,7 +13,7 @@
         <ContentTargetFolders>content</ContentTargetFolders>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <Copyright>Zeta Technologies © 2026</Copyright>
-        <Description>Service application with triggers to process DeepSight messages</Description>
+        <Description>Service application for ingestion messages processing</Description>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <EnablePackageValidation>true</EnablePackageValidation>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>

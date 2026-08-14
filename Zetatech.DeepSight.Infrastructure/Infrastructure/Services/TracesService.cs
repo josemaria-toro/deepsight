@@ -45,7 +45,7 @@ public sealed class TracesService : BaseDeepSightService, ITracesService
     public override async Task DeleteAsync(UInt32 daysToKeep,
                                            CancellationToken cancellationToken = default)
     {
-        await _tracesRepository.DeleteAsync(x => x.Timestamp.Date < DateTime.UtcNow.AddDays(-daysToKeep), cancellationToken)
+        await _tracesRepository.DeleteAsync(x => x.Timestamp.Date < DateTime.UtcNow.Date.AddDays(-daysToKeep), cancellationToken)
                                .ConfigureAwait(false);
     }
     public async Task<IList<TraceDto>> GetAsync(CancellationToken cancellationToken = default)
