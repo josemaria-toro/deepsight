@@ -12,7 +12,7 @@ Librería perteneciente a la plataforma **Zetatech DeepSight**, desarrollada por
 ### DeepSight
 ``` json
 {
-   "logging": {
+   "telemetry": {
       "deepSight": {
          "appName": "",
          "appVersion": "", // Version in format major.minor.revision

@@ -28,7 +28,13 @@ public sealed class DeepSightTelemetry : BaseTelemetry
             BaseAddress = _options.Uri,
             Timeout = TimeSpan.FromSeconds(1)
         };
+
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        if (!$"{_httpClient.BaseAddress}".EndsWith("/"))
+        {
+            _httpClient.BaseAddress = new Uri($"{_httpClient.BaseAddress}/");
+        }
     }
 
     protected override void Dispose(Boolean disposing)
@@ -47,7 +53,7 @@ public sealed class DeepSightTelemetry : BaseTelemetry
             _httpClient = null;
         }
     }
-    private async Task SendTelemetryDataAsync(String urlPath,
+    private async Task SendTelemetryDataAsync(String urlRelativePath,
                                               IDictionary<String, Object> metadata,
                                               CancellationToken cancellationToken = default)
     {
@@ -75,7 +81,7 @@ public sealed class DeepSightTelemetry : BaseTelemetry
         {
             var jsonBody = Json.ToString(deepSightTelemetryDto);
 
-            using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, urlPath);
+            using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, urlRelativePath);
 
             httpRequestMessage.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 

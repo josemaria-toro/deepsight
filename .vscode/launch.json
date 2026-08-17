@@ -25,6 +25,17 @@
         {
             "args": "",
             "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Zetatech.DeepSight.Mcp",
+            "name": "DeepSight MCP Server",
+            "preLaunchTask": "",
+            "program": "${workspaceFolder}/Zetatech.DeepSight.Mcp/bin/Debug/net10.0/Zetatech.DeepSight.Mcp.dll",
+            "request": "launch",
+            "stopAtEntry": false,
+            "type": "coreclr"
+        },
+        {
+            "args": "",
+            "console": "integratedTerminal",
             "cwd": "${workspaceFolder}/Zetatech.DeepSight.Triggers",
             "name": "DeepSight Triggers",
             "preLaunchTask": "",

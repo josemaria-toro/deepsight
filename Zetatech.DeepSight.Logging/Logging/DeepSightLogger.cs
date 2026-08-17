@@ -7,8 +7,8 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Zetatech.Accelerate.Logging.Abstractions;
-using Zetatech.DeepSight.Logging.Dtos;
 using Zetatech.Accelerate.Serialization;
+using Zetatech.DeepSight.Logging.Dtos;
 
 namespace Zetatech.DeepSight.Logging;
 
@@ -54,7 +54,32 @@ public sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
             TrackException(logLevel, exception, loggerDto, traceSpan);
             TrackTrace(logLevel, $"{state}", loggerDto, traceSpan);
         }
+    }
+    private void SendLoggingData(String urlRelativePath,
+                                 DeepSightLoggerDto deepSightLoggerDto,
+                                 String traceSpan)
+    {
+        try
+        {
+            var jsonBody = Json.ToString(deepSightLoggerDto);
+
+            using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, urlRelativePath);
+
+            httpRequestMessage.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+            if (!String.IsNullOrEmpty(traceSpan))
+            {
+                httpRequestMessage.Headers.Add("tracespan", traceSpan);
+            }
+
+            _ = _httpClient.SendAsync(httpRequestMessage)
+                           .GetAwaiter()
+                           .GetResult();
         }
+        catch
+        {
+        }
+    }
     private void TrackException(LogLevel logLevel,
                                 Exception exception,
                                 DeepSightLoggerDto deepSightLoggerDto,
@@ -69,28 +94,9 @@ public sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
             deepSightLoggerDto.Metadata.Add("stackTrace", exception.StackTrace);
             deepSightLoggerDto.Metadata.Add("typeName", exception.GetType().Name);
 
-            try
-            {
-                var jsonBody = Json.ToString(deepSightLoggerDto);
+            SendLoggingData("errors", deepSightLoggerDto, traceSpan);
 
-                using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, "errors");
-
-                httpRequestMessage.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-                if (!String.IsNullOrEmpty(traceSpan))
-                {
-                    httpRequestMessage.Headers.Add("tracespan", traceSpan);
-                }
-
-                _httpClient.SendAsync(httpRequestMessage).Wait(250);
-            }
-            catch
-            {
-            }
-            finally
-            {
-                exception = exception.InnerException;
-            }
+            exception = exception.InnerException;
         }
     }
     private void TrackTrace(LogLevel logLevel,
@@ -103,23 +109,6 @@ public sealed class DeepSightLogger : BaseLogger<DeepSightLoggerOptions>
         deepSightLoggerDto.Metadata.Add("message", message);
         deepSightLoggerDto.Metadata.Add("severity", logLevel);
 
-        try
-        {
-            var jsonBody = Json.ToString(deepSightLoggerDto);
-
-            using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, "traces");
-
-            httpRequestMessage.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-            if (!String.IsNullOrEmpty(traceSpan))
-            {
-                httpRequestMessage.Headers.Add("tracespan", traceSpan);
-            }
-
-            _httpClient.SendAsync(httpRequestMessage).Wait(250);
-        }
-        catch
-        {
-        }
+        SendLoggingData("traces", deepSightLoggerDto, traceSpan);
     }
 }

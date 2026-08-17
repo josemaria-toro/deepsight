@@ -23,7 +23,13 @@ public sealed class DeepSightLoggerProvider : ILoggerProvider
             BaseAddress = _options.Value.Uri,
             Timeout = TimeSpan.FromSeconds(1)
         };
+
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        if (!$"{_httpClient.BaseAddress}".EndsWith("/"))
+        {
+            _httpClient.BaseAddress = new Uri($"{_httpClient.BaseAddress}/");
+        }
     }
 
     public ILogger CreateLogger(String category)

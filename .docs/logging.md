@@ -17,11 +17,10 @@ Librería perteneciente a la plataforma **Zetatech DeepSight**, desarrollada por
       "deepSight": {
          "appName": "",
          "appVersion": "", // Version in format major.minor.revision
-         "logLevel": "debug | information | warning | error | critical",
          "url": ""
       },
       "logLevel": {
-         "deepSight": "information"
+         "deepSight": "debug | information | warning | error | critical"
       }
    }
 }
