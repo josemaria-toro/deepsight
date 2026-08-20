@@ -10,7 +10,7 @@ public sealed class RemoveObsoleteDependenciesJob : BaseTimerJob
 {
     private readonly IDependenciesService _dependenciesService;
 
-    public RemoveObsoleteDependenciesJob(IDependenciesService dependenciesService) : base(TimeSpan.FromSeconds(30))
+    public RemoveObsoleteDependenciesJob(IDependenciesService dependenciesService) : base(TimeSpan.FromHours(1), true)
     {
         _dependenciesService = dependenciesService ?? throw new ArgumentException("The provided dependencies service must be a valid instance", nameof(dependenciesService));
     }

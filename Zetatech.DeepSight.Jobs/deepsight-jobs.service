@@ -3,16 +3,16 @@ WantedBy=multi-user.target
 
 [Service]
 ExecStart=/usr/bin/dotnet Zetatech.DeepSight.Jobs.dll
-Group=ssl-cert
+Group=zeta
 Restart=always
 RestartSec=10
 SyslogIdentifier=Zetatech.DeepSight.Jobs
 Type=simple
-User=deepsight
+User=zeta
 WorkingDirectory=/usr/share/deepsight/jobs
 
 Environment=DOTNET_CLI_TELEMETRY_OPTOUT=1
-Environment=DOTNET_ENVIRONMENT=Production
+Environment=DOTNET_ENVIRONMENT=Development
 Environment=DOTNET_NOLOGO=1
 Environment=DOTNET_ROOT=/usr/share/dotnet
 

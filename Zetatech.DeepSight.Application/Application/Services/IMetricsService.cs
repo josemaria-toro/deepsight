@@ -18,5 +18,7 @@ public interface IMetricsService : IDeepSightService
                                                 DateTime? dateTimeTo = null,
                                                 String dimension = null,
                                                 String name = null,
+                                                String spanId = null,
+                                                String traceId = null,
                                                 CancellationToken cancellationToken = default);
 }

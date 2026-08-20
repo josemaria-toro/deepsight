@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Zetatech.Accelerate.DependencyInjection;
 using Zetatech.Accelerate.Http.Middlewares;
 using Zetatech.DeepSight.DependencyInjection;
-using Zetatech.DeepSight.Http.Middlewares;
 
 namespace Zetatech.DeepSight;
 
@@ -32,10 +31,8 @@ public class Program
 
         app.UseCorsFeatures();
         app.UseMiddleware<W3CActivityMiddleware>()
-           .UseMiddleware<LogHttpRequestMiddleware>()
            .UseMiddleware<SecurityHeadersMiddleware>()
-           .UseMiddleware<ExceptionsHandlerMiddleware>()
-           .UseMiddleware<CheckTenantInRouteMiddleware>();
+           .UseMiddleware<ExceptionsHandlerMiddleware>();
         app.UseMvcFeatures();
         app.UseRateLimitsFeatures();
 

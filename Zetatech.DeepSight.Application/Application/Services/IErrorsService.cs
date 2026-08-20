@@ -20,6 +20,8 @@ public interface IErrorsService : IDeepSightService
                                                String category = null,
                                                String message = null,
                                                LogLevel? severity = null,
+                                               String spanId = null,
+                                               String traceId = null,
                                                String type = null,
                                                CancellationToken cancellationToken = default);
 }

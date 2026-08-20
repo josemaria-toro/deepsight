@@ -1,8 +1,9 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
+using Zetatech.Accelerate.Serialization;
 using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Mcp.Resources;
@@ -10,20 +11,31 @@ namespace Zetatech.DeepSight.Mcp.Resources;
 [McpServerResourceType]
 public class PageViewsResourceHandler
 {
-    private readonly ILogger _logger;
     private readonly IPageViewsService _pageViewsService;
 
-    public PageViewsResourceHandler(IPageViewsService pageViewsService,
-                                    ILoggerFactory loggerFactory)
+    public PageViewsResourceHandler(IPageViewsService pageViewsService)
     {
-        _logger = loggerFactory.CreateLogger<PageViewsResourceHandler>();
         _pageViewsService = pageViewsService;
     }
 
-    [McpServerResource(UriTemplate = "db://pageviews")]
-    public async Task<String> GetAsync(CancellationToken cancellationToken = default)
+    [McpServerResource(UriTemplate = "db://pageviews{?appName,clientIpAddress,hostname,tenant,dateTimeFrom,dateTimeTo,deviceType,name,spanId,traceId,url,userAgent}", MimeType = "application/json")]
+    public async Task<String> GetAsync(String appName = null,
+                                       IPAddress clientIpAddress = null,
+                                       String hostname = null,
+                                       Guid? tenant = null,
+                                       DateTime? dateTimeFrom = null,
+                                       DateTime? dateTimeTo = null,
+                                       String deviceType = null,
+                                       String name = null,
+                                       String spanId = null,
+                                       String traceId = null,
+                                       Uri url = null,
+                                       String userAgent = null,
+                                       CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Se obtienen las visualizaciones de páginas");
-        return "Estas son tus visualizaciones de páginas";
+        var pageViewDtos = await _pageViewsService.GetUsingFiltersAsync(appName, clientIpAddress, hostname, tenant, dateTimeFrom, dateTimeTo, deviceType, name, spanId, traceId, url, userAgent, cancellationToken)
+                                                  .ConfigureAwait(false);
+
+        return Json.ToString(pageViewDtos);
     }
 }

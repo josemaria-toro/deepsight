@@ -18,8 +18,10 @@ public static class MetricBuilder
             Dimension = metricEntity.Dimension,
             HostName = metricEntity.HostName,
             Name = metricEntity.Name,
+            SpanId = metricEntity.SpanId,
             TenantId = metricEntity.TenantId,
             Timestamp = metricEntity.Timestamp,
+            TraceId = metricEntity.TraceId,
             Value = metricEntity.Value
         };
 

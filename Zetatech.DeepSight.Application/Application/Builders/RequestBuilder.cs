@@ -21,10 +21,12 @@ public static class RequestDtoBuilder
             EndPoint = requestEntity.EndPoint,
             HostName = requestEntity.HostName,
             Name = requestEntity.Name,
+            SpanId = requestEntity.SpanId,
             StatusCode = requestEntity.StatusCode,
             Success = requestEntity.Success,
             TenantId = requestEntity.TenantId,
             Timestamp = requestEntity.Timestamp,
+            TraceId = requestEntity.TraceId,
             Type = requestEntity.Type
         };
 

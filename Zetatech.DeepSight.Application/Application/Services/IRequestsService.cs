@@ -21,8 +21,10 @@ public interface IRequestsService : IDeepSightService
                                                  String endpoint = null,
                                                  IPAddress ipAddress = null,
                                                  String name = null,
+                                                 String spanId = null,
                                                  Int32? statusCode = null,
                                                  Boolean? success = null,
+                                                 String traceId = null,
                                                  String type = null,
                                                  CancellationToken cancellationToken = default);
 }

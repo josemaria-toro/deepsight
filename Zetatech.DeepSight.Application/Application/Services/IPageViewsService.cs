@@ -18,6 +18,8 @@ public interface IPageViewsService : IDeepSightService
                                                   DateTime? dateTimeTo = null,
                                                   String deviceType = null,
                                                   String name = null,
+                                                  String spanId = null,
+                                                  String traceId = null,
                                                   Uri url = null,
                                                   String userAgent = null,
                                                   CancellationToken cancellationToken = default);

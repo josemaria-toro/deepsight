@@ -41,6 +41,7 @@
         <SignAssembly>true</SignAssembly>
         <TargetFramework>net10.0</TargetFramework>
         <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+        <UserSecretsId>fdb97295-ad50-4a79-85ff-151c892c99d3</UserSecretsId>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <DebugSymbols>true</DebugSymbols>
@@ -60,5 +61,7 @@
         <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Application/Zetatech.DeepSight.Application.csproj" />
         <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Domain/Zetatech.DeepSight.Domain.csproj" />
         <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Infrastructure/Zetatech.DeepSight.Infrastructure.csproj" />
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Logging/Zetatech.DeepSight.Logging.csproj" />
+        <ProjectReference Include="$(SolutionDir)/Zetatech.DeepSight.Telemetry/Zetatech.DeepSight.Telemetry.csproj" />
     </ItemGroup>
 </Project>

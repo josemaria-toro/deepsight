@@ -18,9 +18,11 @@ public static class ErrorBuilder
             Category = errorEntity.Category,
             HostName = errorEntity.HostName,
             Message = errorEntity.Message,
+            SpanId = errorEntity.SpanId,
             StackTrace = errorEntity.StackTrace,
             TenantId = errorEntity.TenantId,
             Timestamp = errorEntity.Timestamp,
+            TraceId = errorEntity.TraceId,
             Type = errorEntity.Type
         };
 

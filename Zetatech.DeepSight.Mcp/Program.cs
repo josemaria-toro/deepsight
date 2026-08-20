@@ -1,14 +1,15 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.AspNetCore;
+using ModelContextProtocol.Protocol;
+using ModelContextProtocol.Server;
 using Zetatech.Accelerate.DependencyInjection;
+using Zetatech.Accelerate.Http.Middlewares;
 using Zetatech.DeepSight.DependencyInjection;
-using Zetatech.DeepSight.Mcp.Resources;
 
 namespace Zetatech.DeepSight;
 
@@ -21,6 +22,8 @@ public class Program
           appBuilder.Configuration.AddConfigurationSources();
           appBuilder.Logging.ClearProviders();
           appBuilder.Services.AddApplicationServices()
+                             .AddConsoleLoggerProvider()
+                             .AddConsoleLoggerProviderOptions()
                              .AddDeepSightLoggerProvider()
                              .AddDeepSightLoggerProviderOptions()
                              .AddDeepSightTelemetry()
@@ -29,9 +32,9 @@ public class Program
                              .AddDomainRepositoriesOptions()
                              .AddMcpServer(options =>
                              {
-                                  options.Capabilities = new ModelContextProtocol.Protocol.ServerCapabilities
+                                  options.Capabilities = new ServerCapabilities
                                   {
-                                       Resources = new ModelContextProtocol.Protocol.ResourcesCapability
+                                       Resources = new ResourcesCapability
                                        {
                                             ListChanged = true,
                                             Subscribe = true
@@ -44,6 +47,9 @@ public class Program
           var app = appBuilder.Build();
 
           app.MapMcp("api/v1/mcp");
+          app.UseMiddleware<W3CActivityMiddleware>()
+             .UseMiddleware<TrackRequestMiddleware>()
+             .UseMiddleware<SecurityHeadersMiddleware>();
 
           await app.StartAsync()
                    .ConfigureAwait(false);

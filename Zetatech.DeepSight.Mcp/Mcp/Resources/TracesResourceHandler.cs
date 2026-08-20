@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
-using Zetatech.DeepSight.Application.Dtos;
+using Zetatech.Accelerate.Serialization;
 using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Mcp.Resources;
@@ -24,28 +22,23 @@ public class TracesResourceHandler
         _tracesService = tracesService;
     }
 
-    [McpServerResource(UriTemplate = "db://traces{?appName,clientIpAddress,hostname,tenant,dateTimeFrom,dateTimeTo,category,message,severity}")]
-    public async Task<IList<TraceDto>> GetAsync(String appName = null,
-                                                IPAddress clientIpAddress = null,
-                                                String hostname = null,
-                                                Guid? tenant = null,
-                                                DateTime? dateTimeFrom = null,
-                                                DateTime? dateTimeTo = null,
-                                                String category = null,
-                                                String message = null,
-                                                LogLevel? severity = null,
-                                                CancellationToken cancellationToken = default)
+    [McpServerResource(UriTemplate = "db://traces{?appName,clientIpAddress,hostname,tenant,dateTimeFrom,dateTimeTo,category,message,severity,spanId,traceId}", MimeType = "application/json")]
+    public async Task<String> GetAsync(String appName = null,
+                                       IPAddress clientIpAddress = null,
+                                       String hostname = null,
+                                       Guid? tenant = null,
+                                       DateTime? dateTimeFrom = null,
+                                       DateTime? dateTimeTo = null,
+                                       String category = null,
+                                       String message = null,
+                                       LogLevel? severity = null,
+                                       String spanId = null,
+                                       String traceId = null,
+                                       CancellationToken cancellationToken = default)
     {
-        return await _tracesService.GetUsingFiltersAsync(appName,
-                                                         clientIpAddress,
-                                                         hostname,
-                                                         tenant,
-                                                         dateTimeFrom,
-                                                         dateTimeTo,
-                                                         category,
-                                                         message,
-                                                         severity,
-                                                         cancellationToken: cancellationToken)
-                                   .ConfigureAwait(false);
+        var traceDtos = await _tracesService.GetUsingFiltersAsync(appName, clientIpAddress, hostname, tenant, dateTimeFrom, dateTimeTo, category, message, severity, spanId, traceId, cancellationToken)
+                                            .ConfigureAwait(false);
+
+        return Json.ToString(traceDtos);
     }
 }

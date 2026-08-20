@@ -3,15 +3,15 @@ WantedBy=multi-user.target
 
 [Service]
 ExecStart=/usr/bin/dotnet Zetatech.DeepSight.Mcp.dll
-Group=ssl-cert
+Group=zeta
 Restart=always
 RestartSec=10
 SyslogIdentifier=Zetatech.DeepSight.Mcp
 Type=simple
-User=deepsight
+User=zeta
 WorkingDirectory=/usr/share/deepsight/mcp
 
-Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_ENVIRONMENT=Development
 Environment=DOTNET_CLI_TELEMETRY_OPTOUT=1
 Environment=DOTNET_NOLOGO=1
 Environment=DOTNET_ROOT=/usr/share/dotnet

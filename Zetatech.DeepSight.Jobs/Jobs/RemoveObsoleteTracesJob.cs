@@ -10,7 +10,7 @@ public sealed class RemoveObsoleteTracesJob : BaseTimerJob
 {
     private readonly ITracesService _tracesService;
 
-    public RemoveObsoleteTracesJob(ITracesService tracesService) : base(TimeSpan.FromDays(1))
+    public RemoveObsoleteTracesJob(ITracesService tracesService) : base(TimeSpan.FromHours(1), true)
     {
         _tracesService = tracesService ?? throw new ArgumentException("The provided traces service must be a valid instance", nameof(tracesService));
     }

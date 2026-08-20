@@ -16,8 +16,10 @@ public static class EventBuilder
             AppName = eventEntity.AppName,
             HostName = eventEntity.HostName,
             Name = eventEntity.Name,
+            SpanId = eventEntity.SpanId,
             TenantId = eventEntity.TenantId,
-            Timestamp = eventEntity.Timestamp
+            Timestamp = eventEntity.Timestamp,
+            TraceId = eventEntity.TraceId
         };
 
         if (Version.TryParse(eventEntity.AppVersion, out var appVersion))

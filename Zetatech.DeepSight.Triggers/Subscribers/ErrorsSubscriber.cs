@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Zetatech.Accelerate.Messaging;
 using Zetatech.Accelerate.Messaging.Abstractions;
@@ -14,17 +15,21 @@ namespace Zetatech.DeepSight.Infrastructure.Subscribers;
 public sealed class ErrorsSubscriber : BaseRabbitMQSubscriber<DeepSightDto>, IErrorsSubscriber
 {
     private readonly IErrorsService _errorsService;
+    private readonly ILogger _logger;
 
     public ErrorsSubscriber(IOptions<RabbitMQOptions> options,
                             IRabbitMQChannelFactory channelFactory,
-                            IErrorsService errorsService) : base(options, channelFactory)
+                            IErrorsService errorsService,
+                            ILoggerFactory loggerFactory) : base(options, channelFactory)
     {
         _errorsService = errorsService ?? throw new ArgumentException("The provided service must be a valid instance", nameof(errorsService));
+        _logger = loggerFactory.CreateLogger<ErrorsSubscriber>();
     }
 
     protected override async Task OnMessageReceivedAsync(RabbitMQMessage<DeepSightDto> message,
                                                          CancellationToken cancellationToken = default)
     {
+        _logger.LogDebug($"Received a new error message with id {message.Id}");
         await _errorsService.CreateAsync(message.Body, cancellationToken)
                             .ConfigureAwait(false);
     }

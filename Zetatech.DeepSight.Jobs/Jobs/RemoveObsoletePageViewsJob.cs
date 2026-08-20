@@ -10,7 +10,7 @@ public sealed class RemoveObsoletePageViewsJob : BaseTimerJob
 {
     private readonly IPageViewsService _pageViewsService;
 
-    public RemoveObsoletePageViewsJob(IPageViewsService pageViewsService) : base(TimeSpan.FromDays(1))
+    public RemoveObsoletePageViewsJob(IPageViewsService pageViewsService) : base(TimeSpan.FromHours(1), true)
     {
         _pageViewsService = pageViewsService ?? throw new ArgumentException("The provided page views service must be a valid instance", nameof(pageViewsService));
     }

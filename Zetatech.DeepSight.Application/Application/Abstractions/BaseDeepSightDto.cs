@@ -13,6 +13,8 @@ public abstract record BaseDeepSightDto : BaseDto
     public Version ClientVersion { get; set; }
     public String HostName { get; set; }
     public IDictionary<String, Object> Metadata { get; set; }
+    public String SpanId { get; set; }
     public Guid TenantId { get; set; }
     public DateTime Timestamp { get; set; }
+    public String TraceId { get; set; }
 }

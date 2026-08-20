@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Zetatech.Accelerate.Messaging;
 using Zetatech.DeepSight.Application.Services;
@@ -31,6 +32,7 @@ public static partial class DependencyInjection
             var applicationService = serviceProvider.GetRequiredService<TApplicationService>();
             var channelFactory = serviceProvider.GetRequiredService<IRabbitMQChannelFactory>();
             var configService = serviceProvider.GetRequiredService<IConfiguration>();
+            var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
             var subscriberOptions = new RabbitMQOptions
             {
                 ConnectionString = configService.GetConnectionString("messageBroker"),
@@ -45,7 +47,8 @@ public static partial class DependencyInjection
             return (TSubscriberInstance)Activator.CreateInstance(typeof(TSubscriberInstance),
                                                                  Options.Create(subscriberOptions),
                                                                  channelFactory,
-                                                                 applicationService);
+                                                                 applicationService,
+                                                                 loggerFactory);
         });
     }
 }

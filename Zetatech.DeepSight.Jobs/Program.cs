@@ -19,6 +19,8 @@ public class Program
         appBuilder.Services.AddApplicationServices()
                            .AddConsoleLoggerProvider()
                            .AddConsoleLoggerProviderOptions()
+                           .AddDeepSightLoggerProvider()
+                           .AddDeepSightLoggerProviderOptions()
                            .AddDomainRepositories()
                            .AddDomainRepositoriesOptions()
                            .AddJobs();
