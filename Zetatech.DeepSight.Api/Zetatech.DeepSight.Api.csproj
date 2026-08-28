@@ -41,7 +41,6 @@
         <SignAssembly>true</SignAssembly>
         <TargetFramework>net10.0</TargetFramework>
         <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
-        <UserSecretsId>fdb97295-ad50-4a79-85ff-151c892c99d3</UserSecretsId>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <DebugSymbols>true</DebugSymbols>

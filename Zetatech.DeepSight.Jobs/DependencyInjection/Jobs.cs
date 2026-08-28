@@ -5,7 +5,7 @@ namespace Zetatech.DeepSight.DependencyInjection;
 
 public static partial class DependencyInjection
 {
-    public static IServiceCollection AddJobs(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddPeriodicJobs(this IServiceCollection serviceCollection)
     {
         return serviceCollection.AddTransient<RemoveObsoleteDependenciesJob>()
                                 .AddTransient<RemoveObsoleteErrorsJob>()

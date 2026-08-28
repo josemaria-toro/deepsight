@@ -6,7 +6,7 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteTracesJob : BaseTimerJob
+public sealed class RemoveObsoleteTracesJob : BasePeriodicJob
 {
     private readonly ITracesService _tracesService;
 

@@ -6,7 +6,7 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteDependenciesJob : BaseTimerJob
+public sealed class RemoveObsoleteDependenciesJob : BasePeriodicJob
 {
     private readonly IDependenciesService _dependenciesService;
 

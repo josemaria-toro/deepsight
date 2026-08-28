@@ -6,7 +6,7 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteErrorsJob : BaseTimerJob
+public sealed class RemoveObsoleteErrorsJob : BasePeriodicJob
 {
     private readonly IErrorsService _errorsService;
 

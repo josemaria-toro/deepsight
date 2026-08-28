@@ -20,21 +20,19 @@ public class Program
         appBuilder.Services.AddApplicationServices()
                            .AddConsoleLoggerProvider()
                            .AddConsoleLoggerProviderOptions()
-                           .AddCorsPolicies()
+                           .AddFlatFileLoggerProvider()
+                           .AddFlatFileLoggerProviderOptions()
                            .AddMessagePublishers()
                            .AddMessagePublishersOptions()
                            .AddMvcComponents()
-                           .AddRabbitMQChannelFactory()
-                           .AddRateLimitsPolicies();
+                           .AddRabbitMQChannelFactory();
 
         var app = appBuilder.Build();
 
-        app.UseCorsFeatures();
         app.UseMiddleware<W3CActivityMiddleware>()
            .UseMiddleware<SecurityHeadersMiddleware>()
            .UseMiddleware<ExceptionsHandlerMiddleware>();
         app.UseMvcFeatures();
-        app.UseRateLimitsFeatures();
 
         await app.StartAsync()
                  .ConfigureAwait(false);

@@ -6,7 +6,7 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoletePageViewsJob : BaseTimerJob
+public sealed class RemoveObsoletePageViewsJob : BasePeriodicJob
 {
     private readonly IPageViewsService _pageViewsService;
 

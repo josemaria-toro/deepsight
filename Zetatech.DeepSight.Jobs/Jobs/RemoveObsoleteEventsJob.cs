@@ -6,7 +6,7 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteEventsJob : BaseTimerJob
+public sealed class RemoveObsoleteEventsJob : BasePeriodicJob
 {
     private readonly IEventsService _eventsService;
 
