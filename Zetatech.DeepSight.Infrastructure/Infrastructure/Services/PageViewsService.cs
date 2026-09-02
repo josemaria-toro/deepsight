@@ -23,7 +23,7 @@ public sealed class PageViewsService : BaseDeepSightService, IPageViewsService
 
     public PageViewsService(ILoggerFactory loggerFactory,
                             IDeepSightPublisher pageViewsPublisher = null,
-                            IPageViewsRepository pageViewsRepository = null)
+                            IPageViewsRepository pageViewsRepository = null) : base(loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<PageViewsService>();
         _pageViewsPublisher = pageViewsPublisher;

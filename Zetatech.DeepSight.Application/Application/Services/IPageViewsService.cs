@@ -9,18 +9,20 @@ namespace Zetatech.DeepSight.Application.Services;
 
 public interface IPageViewsService : IDeepSightService
 {
-    Task<IList<PageViewDto>> GetAsync(CancellationToken cancellationToken = default);
-    Task<IList<PageViewDto>> GetUsingFiltersAsync(String appName = null,
-                                                  IPAddress clientIpAddress = null,
-                                                  String hostname = null,
-                                                  Guid? tenant = null,
-                                                  DateTime? dateTimeFrom = null,
-                                                  DateTime? dateTimeTo = null,
-                                                  String deviceType = null,
-                                                  String name = null,
-                                                  String spanId = null,
-                                                  String traceId = null,
-                                                  Uri url = null,
-                                                  String userAgent = null,
-                                                  CancellationToken cancellationToken = default);
+    Task<Guid> CreateAsync(PageViewDto pageViewDto, CancellationToken cancellationToken = default);
+    Task<IList<PageViewDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Guid> PublishAsync(PageViewDto pageViewDto, CancellationToken cancellationToken = default);
+    Task<IList<PageViewDto>> SearchAsync(String appName = null,
+                                         IPAddress clientIpAddress = null,
+                                         DateTime? dateTimeFrom = null,
+                                         DateTime? dateTimeTo = null,
+                                         String deviceType = null,
+                                         String hostName = null,
+                                         String name = null,
+                                         String spanId = null,
+                                         Guid? tenantId = null,
+                                         String traceId = null,
+                                         Uri url = null,
+                                         String userAgent = null,
+                                         CancellationToken cancellationToken = default);
 }

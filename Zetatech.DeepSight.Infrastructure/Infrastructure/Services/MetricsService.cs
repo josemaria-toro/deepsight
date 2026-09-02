@@ -23,7 +23,7 @@ public sealed class MetricsService : BaseDeepSightService, IMetricsService
 
     public MetricsService(ILoggerFactory loggerFactory,
                           IDeepSightPublisher metricsPublisher = null,
-                          IMetricsRepository metricsRepository = null)
+                          IMetricsRepository metricsRepository = null) : base(loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<MetricsService>();
         _metricsPublisher = metricsPublisher;

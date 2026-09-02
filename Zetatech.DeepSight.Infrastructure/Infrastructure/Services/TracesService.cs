@@ -23,7 +23,7 @@ public sealed class TracesService : BaseDeepSightService, ITracesService
 
     public TracesService(ILoggerFactory loggerFactory,
                          IDeepSightPublisher tracesPublisher = null,
-                         ITracesRepository tracesRepository = null)
+                         ITracesRepository tracesRepository = null) : base(loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<TracesService>();
         _tracesPublisher = tracesPublisher;

@@ -10,17 +10,19 @@ namespace Zetatech.DeepSight.Application.Services;
 
 public interface ITracesService : IDeepSightService
 {
-    Task<IList<TraceDto>> GetAsync(CancellationToken cancellationToken = default);
-    Task<IList<TraceDto>> GetUsingFiltersAsync(String appName = null,
-                                               IPAddress clientIpAddress = null,
-                                               String hostname = null,
-                                               Guid? tenant = null,
-                                               DateTime? dateTimeFrom = null,
-                                               DateTime? dateTimeTo = null,
-                                               String category = null,
-                                               String message = null,
-                                               LogLevel? severity = null,
-                                               String spanId = null,
-                                               String traceId = null,
-                                               CancellationToken cancellationToken = default);
+    Task<Guid> CreateAsync(TraceDto traceDto, CancellationToken cancellationToken = default);
+    Task<IList<TraceDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Guid> PublishAsync(TraceDto traceDto, CancellationToken cancellationToken = default);
+    Task<IList<TraceDto>> SearchAsync(String appName = null,
+                                      String category = null,
+                                      IPAddress clientIpAddress = null,
+                                      DateTime? dateTimeFrom = null,
+                                      DateTime? dateTimeTo = null,
+                                      String hostName = null,
+                                      String message = null,
+                                      LogLevel? severity = null,
+                                      String spanId = null,
+                                      Guid? tenantId = null,
+                                      String traceId = null,
+                                      CancellationToken cancellationToken = default);
 }

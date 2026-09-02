@@ -23,7 +23,7 @@ public sealed class RequestsService : BaseDeepSightService, IRequestsService
 
     public RequestsService(ILoggerFactory loggerFactory,
                            IDeepSightPublisher requestsPublisher = null,
-                           IRequestsRepository requestsRepository = null)
+                           IRequestsRepository requestsRepository = null) : base(loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<RequestsService>();
         _requestsPublisher = requestsPublisher;

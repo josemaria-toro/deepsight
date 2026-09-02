@@ -23,7 +23,7 @@ public sealed class EventsService : BaseDeepSightService, IEventsService
 
     public EventsService(ILoggerFactory loggerFactory,
                          IDeepSightPublisher eventsPublisher = null,
-                         IEventsRepository eventsRepository = null)
+                         IEventsRepository eventsRepository = null) : base(loggerFactory)
     {
         _eventsPublisher = eventsPublisher;
         _eventsRepository = eventsRepository;

@@ -23,7 +23,7 @@ public sealed class TestsService : BaseDeepSightService, ITestsService
 
     public TestsService(ILoggerFactory loggerFactory,
                         IDeepSightPublisher testsPublisher = null,
-                        ITestsRepository testsRepository = null)
+                        ITestsRepository testsRepository = null) : base(loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<TestsService>();
         _testsPublisher = testsPublisher;

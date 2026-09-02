@@ -9,16 +9,18 @@ namespace Zetatech.DeepSight.Application.Services;
 
 public interface IMetricsService : IDeepSightService
 {
-    Task<IList<MetricDto>> GetAsync(CancellationToken cancellationToken = default);
-    Task<IList<MetricDto>> GetUsingFiltersAsync(String appName = null,
-                                                IPAddress clientIpAddress = null,
-                                                String hostname = null,
-                                                Guid? tenant = null,
-                                                DateTime? dateTimeFrom = null,
-                                                DateTime? dateTimeTo = null,
-                                                String dimension = null,
-                                                String name = null,
-                                                String spanId = null,
-                                                String traceId = null,
-                                                CancellationToken cancellationToken = default);
+    Task<Guid> CreateAsync(MetricDto metricDto, CancellationToken cancellationToken = default);
+    Task<IList<MetricDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Guid> PublishAsync(MetricDto metricDto, CancellationToken cancellationToken = default);
+    Task<IList<MetricDto>> SearchAsync(String appName = null,
+                                       IPAddress clientIpAddress = null,
+                                       DateTime? dateTimeFrom = null,
+                                       DateTime? dateTimeTo = null,
+                                       String dimension = null,
+                                       String hostName = null,
+                                       String name = null,
+                                       String spanId = null,
+                                       Guid? tenantId = null,
+                                       String traceId = null,
+                                       CancellationToken cancellationToken = default);
 }

@@ -9,19 +9,21 @@ namespace Zetatech.DeepSight.Application.Services;
 
 public interface ITestsService : IDeepSightService
 {
-    Task<IList<TestDto>> GetAsync(CancellationToken cancellationToken = default);
-    Task<IList<TestDto>> GetUsingFiltersAsync(String appName = null,
-                                              IPAddress clientIpAddress = null,
-                                              String hostname = null,
-                                              Guid? tenant = null,
-                                              DateTime? dateTimeFrom = null,
-                                              DateTime? dateTimeTo = null,
-                                              Double? durationFrom = null,
-                                              Double? durationTo = null,
-                                              String message = null,
-                                              String name = null,
-                                              String spanId = null,
-                                              Boolean? success = null,
-                                              String traceId = null,
-                                              CancellationToken cancellationToken = default);
+    Task<Guid> CreateAsync(TestDto testDto, CancellationToken cancellationToken = default);
+    Task<IList<TestDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Guid> PublishAsync(TestDto testDto, CancellationToken cancellationToken = default);
+    Task<IList<TestDto>> SearchAsync(String appName = null,
+                                     IPAddress clientIpAddress = null,
+                                     DateTime? dateTimeFrom = null,
+                                     DateTime? dateTimeTo = null,
+                                     Double? durationFrom = null,
+                                     Double? durationTo = null,
+                                     String hostName = null,
+                                     String message = null,
+                                     String name = null,
+                                     String spanId = null,
+                                     Boolean? success = null,
+                                     Guid? tenantId = null,
+                                     String traceId = null,
+                                     CancellationToken cancellationToken = default);
 }

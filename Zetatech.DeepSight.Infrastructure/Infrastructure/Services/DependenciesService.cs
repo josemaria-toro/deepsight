@@ -19,31 +19,28 @@ public sealed class DependenciesService : BaseDeepSightService, IDependenciesSer
 {
     private readonly IDeepSightPublisher _dependenciesPublisher;
     private readonly IDependenciesRepository _dependenciesRepository;
-    private readonly ILogger _logger;
 
     public DependenciesService(ILoggerFactory loggerFactory,
                                IDeepSightPublisher dependenciesPublisher = null,
-                               IDependenciesRepository dependenciesRepository = null)
+                               IDependenciesRepository dependenciesRepository = null) : base(loggerFactory)
     {
         _dependenciesPublisher = dependenciesPublisher;
         _dependenciesRepository = dependenciesRepository;
-        _logger = loggerFactory.CreateLogger<DependenciesService>();
     }
 
-    public override async Task<Guid> CreateAsync(DeepSightDto deepSightDto,
-                                                 CancellationToken cancellationToken = default)
+    public override async Task<Guid> CreateAsync(DependencyDto dependencyDto, CancellationToken cancellationToken = default)
     {
         if (_dependenciesRepository == null)
         {
             throw new NotSupportedException("The dependencies repository is not currently available");
         }
 
-        _logger.LogDebug("Building dependency entity from dto");
+        Logger.LogDebug("Building dependency entity from dto");
         var dependencyEntity = deepSightDto.ToDependencyEntity();
-        _logger.LogDebug("Inserting dependency entity into repository");
+        Logger.LogDebug("Inserting dependency entity into repository");
         await _dependenciesRepository.InsertAsync(dependencyEntity, cancellationToken)
                                      .ConfigureAwait(false);
-        _logger.LogDebug($"The id of the new dependency is {dependencyEntity.Id}");
+        Logger.LogTrace($"The id of the new dependency is {dependencyEntity.Id}");
 
         return dependencyEntity.Id;
     }

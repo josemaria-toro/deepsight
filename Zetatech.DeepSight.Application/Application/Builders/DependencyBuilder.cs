@@ -1,151 +1,151 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using Zetatech.Accelerate.Serialization;
-using Zetatech.DeepSight.Application.Dtos;
-using Zetatech.DeepSight.Domain.Entities;
+// using System;
+// using System.Collections.Generic;
+// using System.Globalization;
+// using System.Net;
+// using Zetatech.Accelerate.Serialization;
+// using Zetatech.DeepSight.Application.Dtos;
+// using Zetatech.DeepSight.Domain.Entities;
 
-namespace Zetatech.DeepSight.Application.Builders;
+// namespace Zetatech.DeepSight.Application.Builders;
 
-public static class DependencyBuilder
-{
-    public static DependencyDto ToDependencyDto(this DependencyEntity dependencyEntity)
-    {
-        var dependencyDto = new DependencyDto
-        {
-            AppName = dependencyEntity.AppName,
-            DataInput = dependencyEntity.DataInput,
-            DataOutput = dependencyEntity.DataOutput,
-            Duration = dependencyEntity.Duration,
-            HostName = dependencyEntity.HostName,
-            Name = dependencyEntity.Name,
-            SpanId = dependencyEntity.SpanId,
-            Success = dependencyEntity.Success,
-            Target = dependencyEntity.Target,
-            TenantId = dependencyEntity.TenantId,
-            Timestamp = dependencyEntity.Timestamp,
-            TraceId = dependencyEntity.TraceId,
-            Type = dependencyEntity.Type
-        };
+// public static class DependencyBuilder
+// {
+//     public static DependencyDto ToDependencyDto(this DependencyEntity dependencyEntity)
+//     {
+//         var dependencyDto = new DependencyDto
+//         {
+//             AppName = dependencyEntity.AppName,
+//             DataInput = dependencyEntity.DataInput,
+//             DataOutput = dependencyEntity.DataOutput,
+//             Duration = dependencyEntity.Duration,
+//             HostName = dependencyEntity.HostName,
+//             Name = dependencyEntity.Name,
+//             SpanId = dependencyEntity.SpanId,
+//             Success = dependencyEntity.Success,
+//             Target = dependencyEntity.Target,
+//             TenantId = dependencyEntity.TenantId,
+//             Timestamp = dependencyEntity.Timestamp,
+//             TraceId = dependencyEntity.TraceId,
+//             Type = dependencyEntity.Type
+//         };
 
-        if (Version.TryParse(dependencyEntity.AppVersion, out var appVersion))
-        {
-            dependencyDto.AppVersion = appVersion;
-        }
+//         if (Version.TryParse(dependencyEntity.AppVersion, out var appVersion))
+//         {
+//             dependencyDto.AppVersion = appVersion;
+//         }
 
-        if (IPAddress.TryParse(dependencyEntity.ClientIpAddress, out var clientIpAddress))
-        {
-            dependencyDto.ClientIpAddress = clientIpAddress;
-        }
+//         if (IPAddress.TryParse(dependencyEntity.ClientIpAddress, out var clientIpAddress))
+//         {
+//             dependencyDto.ClientIpAddress = clientIpAddress;
+//         }
 
-        if (Version.TryParse(dependencyEntity.ClientVersion, out var clientVersion))
-        {
-            dependencyDto.ClientVersion = clientVersion;
-        }
+//         if (Version.TryParse(dependencyEntity.ClientVersion, out var clientVersion))
+//         {
+//             dependencyDto.ClientVersion = clientVersion;
+//         }
 
-        if (!String.IsNullOrEmpty(dependencyEntity.Metadata))
-        {
-            dependencyDto.Metadata = Json.ToObject<IDictionary<String, Object>>(dependencyEntity.Metadata);
-        }
+//         if (!String.IsNullOrEmpty(dependencyEntity.Metadata))
+//         {
+//             dependencyDto.Metadata = Json.ToObject<IDictionary<String, Object>>(dependencyEntity.Metadata);
+//         }
 
-        return dependencyDto;
-    }
-    public static DependencyEntity ToDependencyEntity(this DeepSightDto deepSightDto)
-    {
-        var dependencyEntity = new DependencyEntity
-        {
-            AppName = deepSightDto.AppName,
-            HostName = deepSightDto.HostName,
-            SpanId = deepSightDto.SpanId,
-            TenantId = deepSightDto.TenantId,
-            Timestamp = deepSightDto.Timestamp,
-            TraceId = deepSightDto.TraceId
-        };
+//         return dependencyDto;
+//     }
+//     public static DependencyEntity ToDependencyEntity(this DeepSightDto deepSightDto)
+//     {
+//         var dependencyEntity = new DependencyEntity
+//         {
+//             AppName = deepSightDto.AppName,
+//             HostName = deepSightDto.HostName,
+//             SpanId = deepSightDto.SpanId,
+//             TenantId = deepSightDto.TenantId,
+//             Timestamp = deepSightDto.Timestamp,
+//             TraceId = deepSightDto.TraceId
+//         };
 
-        if (deepSightDto.AppVersion != null)
-        {
-            dependencyEntity.AppVersion = $"{deepSightDto.AppVersion}";
-        }
+//         if (deepSightDto.AppVersion != null)
+//         {
+//             dependencyEntity.AppVersion = $"{deepSightDto.AppVersion}";
+//         }
 
-        if (deepSightDto.ClientIpAddress != null)
-        {
-            dependencyEntity.ClientIpAddress = $"{deepSightDto.ClientIpAddress}";
-        }
+//         if (deepSightDto.ClientIpAddress != null)
+//         {
+//             dependencyEntity.ClientIpAddress = $"{deepSightDto.ClientIpAddress}";
+//         }
 
-        if (deepSightDto.ClientVersion != null)
-        {
-            dependencyEntity.ClientVersion = $"{deepSightDto.ClientVersion}";
-        }
+//         if (deepSightDto.ClientVersion != null)
+//         {
+//             dependencyEntity.ClientVersion = $"{deepSightDto.ClientVersion}";
+//         }
 
-        if (deepSightDto.Metadata != null)
-        {
-            if (deepSightDto.Metadata.ContainsKey("dataInput"))
-            {
-                if (deepSightDto.Metadata["dataInput"] != null)
-                {
-                    var base64String = deepSightDto.Metadata["dataInput"].ToString();
-                    dependencyEntity.DataInput = Convert.FromBase64String(base64String);
-                }
+//         if (deepSightDto.Metadata != null)
+//         {
+//             if (deepSightDto.Metadata.ContainsKey("dataInput"))
+//             {
+//                 if (deepSightDto.Metadata["dataInput"] != null)
+//                 {
+//                     var base64String = deepSightDto.Metadata["dataInput"].ToString();
+//                     dependencyEntity.DataInput = Convert.FromBase64String(base64String);
+//                 }
 
-                deepSightDto.Metadata.Remove("dataInput");
-            }
+//                 deepSightDto.Metadata.Remove("dataInput");
+//             }
 
-            if (deepSightDto.Metadata.ContainsKey("dataOutput"))
-            {
-                if (deepSightDto.Metadata["dataOutput"] != null)
-                {
-                    var base64String = deepSightDto.Metadata["dataOutput"].ToString();
-                    dependencyEntity.DataOutput = Convert.FromBase64String(base64String);
-                }
+//             if (deepSightDto.Metadata.ContainsKey("dataOutput"))
+//             {
+//                 if (deepSightDto.Metadata["dataOutput"] != null)
+//                 {
+//                     var base64String = deepSightDto.Metadata["dataOutput"].ToString();
+//                     dependencyEntity.DataOutput = Convert.FromBase64String(base64String);
+//                 }
 
-                deepSightDto.Metadata.Remove("dataOutput");
-            }
+//                 deepSightDto.Metadata.Remove("dataOutput");
+//             }
 
-            if (deepSightDto.Metadata.ContainsKey("duration"))
-            {
-                if (deepSightDto.Metadata["duration"] != null)
-                {
-                    dependencyEntity.Duration = Double.Parse(deepSightDto.Metadata["duration"].ToString(), CultureInfo.InvariantCulture);
-                }
+//             if (deepSightDto.Metadata.ContainsKey("duration"))
+//             {
+//                 if (deepSightDto.Metadata["duration"] != null)
+//                 {
+//                     dependencyEntity.Duration = Double.Parse(deepSightDto.Metadata["duration"].ToString(), CultureInfo.InvariantCulture);
+//                 }
 
-                deepSightDto.Metadata.Remove("duration");
-            }
+//                 deepSightDto.Metadata.Remove("duration");
+//             }
 
-            if (deepSightDto.Metadata.ContainsKey("name"))
-            {
-                dependencyEntity.Name = deepSightDto.Metadata["name"]?.ToString();
-                deepSightDto.Metadata.Remove("name");
-            }
+//             if (deepSightDto.Metadata.ContainsKey("name"))
+//             {
+//                 dependencyEntity.Name = deepSightDto.Metadata["name"]?.ToString();
+//                 deepSightDto.Metadata.Remove("name");
+//             }
 
-            if (deepSightDto.Metadata.ContainsKey("success"))
-            {
-                if (deepSightDto.Metadata["success"] != null)
-                {
-                    dependencyEntity.Success = Boolean.Parse(deepSightDto.Metadata["success"].ToString());
-                }
+//             if (deepSightDto.Metadata.ContainsKey("success"))
+//             {
+//                 if (deepSightDto.Metadata["success"] != null)
+//                 {
+//                     dependencyEntity.Success = Boolean.Parse(deepSightDto.Metadata["success"].ToString());
+//                 }
 
-                deepSightDto.Metadata.Remove("success");
-            }
+//                 deepSightDto.Metadata.Remove("success");
+//             }
 
-            if (deepSightDto.Metadata.ContainsKey("target"))
-            {
-                dependencyEntity.Target = deepSightDto.Metadata["target"]?.ToString();
-                deepSightDto.Metadata.Remove("target");
-            }
+//             if (deepSightDto.Metadata.ContainsKey("target"))
+//             {
+//                 dependencyEntity.Target = deepSightDto.Metadata["target"]?.ToString();
+//                 deepSightDto.Metadata.Remove("target");
+//             }
 
-            if (deepSightDto.Metadata.ContainsKey("type"))
-            {
-                dependencyEntity.Type = deepSightDto.Metadata["type"]?.ToString();
-                deepSightDto.Metadata.Remove("type");
-            }
+//             if (deepSightDto.Metadata.ContainsKey("type"))
+//             {
+//                 dependencyEntity.Type = deepSightDto.Metadata["type"]?.ToString();
+//                 deepSightDto.Metadata.Remove("type");
+//             }
 
-            if (deepSightDto.Metadata.Count > 0)
-            {
-                dependencyEntity.Metadata = Json.ToString(deepSightDto.Metadata);
-            }
-        }
+//             if (deepSightDto.Metadata.Count > 0)
+//             {
+//                 dependencyEntity.Metadata = Json.ToString(deepSightDto.Metadata);
+//             }
+//         }
 
-        return dependencyEntity;
-    }
-}
+//         return dependencyEntity;
+//     }
+// }

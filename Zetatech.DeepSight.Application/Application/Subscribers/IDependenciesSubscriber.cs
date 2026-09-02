@@ -3,6 +3,6 @@ using Zetatech.DeepSight.Application.Dtos;
 
 namespace Zetatech.DeepSight.Application.Subscribers;
 
-public interface IDependenciesSubscriber : IMessageSubscriber<DeepSightDto>
+public interface IDependenciesSubscriber : IMessageSubscriber<DependencyDto>
 {
 }

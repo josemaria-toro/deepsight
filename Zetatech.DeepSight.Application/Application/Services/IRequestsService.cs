@@ -9,22 +9,24 @@ namespace Zetatech.DeepSight.Application.Services;
 
 public interface IRequestsService : IDeepSightService
 {
-    Task<IList<RequestDto>> GetAsync(CancellationToken cancellationToken = default);
-    Task<IList<RequestDto>> GetUsingFiltersAsync(String appName = null,
-                                                 IPAddress clientIpAddress = null,
-                                                 String hostname = null,
-                                                 Guid? tenant = null,
-                                                 DateTime? dateTimeFrom = null,
-                                                 DateTime? dateTimeTo = null,
-                                                 Double? durationFrom = null,
-                                                 Double? durationTo = null,
-                                                 String endpoint = null,
-                                                 IPAddress ipAddress = null,
-                                                 String name = null,
-                                                 String spanId = null,
-                                                 Int32? statusCode = null,
-                                                 Boolean? success = null,
-                                                 String traceId = null,
-                                                 String type = null,
-                                                 CancellationToken cancellationToken = default);
+    Task<Guid> CreateAsync(RequestDto requestDto, CancellationToken cancellationToken = default);
+    Task<IList<RequestDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Guid> PublishAsync(RequestDto requestDto, CancellationToken cancellationToken = default);
+    Task<IList<RequestDto>> SearchAsync(String appName = null,
+                                        IPAddress clientIpAddress = null,
+                                        DateTime? dateTimeFrom = null,
+                                        DateTime? dateTimeTo = null,
+                                        Double? durationFrom = null,
+                                        Double? durationTo = null,
+                                        String endpoint = null,
+                                        String hostName = null,
+                                        IPAddress ipAddress = null,
+                                        String name = null,
+                                        String spanId = null,
+                                        Int32? statusCode = null,
+                                        Boolean? success = null,
+                                        Guid? tenantId = null,
+                                        String traceId = null,
+                                        String type = null,
+                                        CancellationToken cancellationToken = default);
 }

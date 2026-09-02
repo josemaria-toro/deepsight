@@ -23,7 +23,7 @@ public sealed class ErrorsService : BaseDeepSightService, IErrorsService
 
     public ErrorsService(ILoggerFactory loggerFactory,
                          IDeepSightPublisher errorsPublisher = null,
-                         IErrorsRepository errorsRepository = null)
+                         IErrorsRepository errorsRepository = null) : base(loggerFactory)
     {
         _errorsPublisher = errorsPublisher;
         _errorsRepository = errorsRepository;
