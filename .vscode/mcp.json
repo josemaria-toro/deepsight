@@ -1,0 +1,9 @@
+{
+	"servers": {
+		"deepsight": {
+			"type": "http",
+			"url": "http://deepsight.tokiota.com:9001/api/v1/mcp"
+		}
+	},
+	"inputs": []
+}

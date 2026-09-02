@@ -7,7 +7,7 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Infrastructure.Abstractions;
 
-public abstract class BaseDeepSightService : BaseService, IDeepSightService
+public abstract class BaseDeepSightService : BaseService
 {
     private readonly ILogger _logger;
 
@@ -17,6 +17,4 @@ public abstract class BaseDeepSightService : BaseService, IDeepSightService
     }
 
     public ILogger Logger => _logger;
-
-    public abstract Task DeleteAsync(UInt32 daysToKeep, CancellationToken cancellationToken = default);
 }

@@ -28,101 +28,114 @@ public sealed class DependenciesService : BaseDeepSightService, IDependenciesSer
         _dependenciesRepository = dependenciesRepository;
     }
 
-    public override async Task<Guid> CreateAsync(DependencyDto dependencyDto, CancellationToken cancellationToken = default)
+    public async Task<Guid> CreateAsync(DependencyDto dependencyDto, CancellationToken cancellationToken = default)
     {
         if (_dependenciesRepository == null)
         {
             throw new NotSupportedException("The dependencies repository is not currently available");
         }
 
-        Logger.LogDebug("Building dependency entity from dto");
-        var dependencyEntity = deepSightDto.ToDependencyEntity();
-        Logger.LogDebug("Inserting dependency entity into repository");
+        Logger.LogDebug("Building entity from dto");
+        var dependencyEntity = dependencyDto.Build();
+        Logger.LogDebug("Inserting entity into database");
         await _dependenciesRepository.InsertAsync(dependencyEntity, cancellationToken)
                                      .ConfigureAwait(false);
-        Logger.LogTrace($"The id of the new dependency is {dependencyEntity.Id}");
+        Logger.LogDebug($"The id of the new dependency is {dependencyEntity.Id}");
 
         return dependencyEntity.Id;
     }
-    public override async Task DeleteAsync(UInt32 daysToKeep,
-                                           CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(UInt32 daysToKeep, CancellationToken cancellationToken = default)
     {
-        var timestampThreshold = DateTime.UtcNow.Date.AddDays(-daysToKeep);
-        _logger.LogDebug($"Deleting dependencies older than {timestampThreshold}");
-        await _dependenciesRepository.DeleteAsync(x => x.Timestamp.Date < timestampThreshold, cancellationToken)
+        var threshold = DateTime.UtcNow.Date.AddDays(-daysToKeep);
+        Logger.LogDebug($"Deleting dependencies older than {threshold}");
+        await _dependenciesRepository.DeleteAsync(x => x.Timestamp.Date < threshold, cancellationToken)
                                      .ConfigureAwait(false);
     }
-    public async Task<IList<DependencyDto>> GetAsync(CancellationToken cancellationToken = default)
+    public async Task<IList<DependencyDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await GetUsingFiltersAsync(cancellationToken: cancellationToken);
+        return await SearchAsync(cancellationToken: cancellationToken);
     }
-    public async Task<IList<DependencyDto>> GetUsingFiltersAsync(String appName = null,
-                                                                 IPAddress clientIpAddress = null,
-                                                                 String hostname = null,
-                                                                 Guid? tenant = null,
-                                                                 DateTime? dateTimeFrom = null,
-                                                                 DateTime? dateTimeTo = null,
-                                                                 Double? durationFrom = null,
-                                                                 Double? durationTo = null,
-                                                                 String name = null,
-                                                                 String spanId = null,
-                                                                 Boolean? success = null,
-                                                                 String target = null,
-                                                                 String traceId = null,
-                                                                 String type = null,
-                                                                 CancellationToken cancellationToken = default)
+    public async Task<Guid> PublishAsync(DependencyDto dependencyDto, CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Selecting dependencies from repository");
+        if (_dependenciesPublisher == null)
+        {
+            throw new NotSupportedException("The dependencies publisher is not currently available");
+        }
+
+        Logger.LogDebug("Publishing a new dependency message");
+        var messageId = await _dependenciesPublisher.PublishAsync(dependencyDto, "dependencies", cancellationToken)
+                                                    .ConfigureAwait(false);
+        Logger.LogDebug($"The id of the published message is {messageId}");
+
+        return messageId;
+    }
+    public async Task<IList<DependencyDto>> SearchAsync(String appName = null,
+                                                        IPAddress clientIpAddress = null,
+                                                        DateTime? dateTimeFrom = null,
+                                                        DateTime? dateTimeTo = null,
+                                                        Double? durationFrom = null,
+                                                        Double? durationTo = null,
+                                                        String hostName = null,
+                                                        String name = null,
+                                                        String spanId = null,
+                                                        Boolean? success = null,
+                                                        String target = null,
+                                                        Guid? tenantId = null,
+                                                        String traceId = null,
+                                                        String type = null,
+                                                        CancellationToken cancellationToken = default)
+    {
+        Logger.LogDebug("Selecting dependencies from database");
         var queryable = await _dependenciesRepository.SelectAsync(cancellationToken: cancellationToken)
                                                      .ConfigureAwait(false);
 
         /* Standard Filters */
 
-        if (tenant.HasValue)
+        if (tenantId.HasValue)
         {
-            _logger.LogDebug($"Adding filter by tenant: {tenant}");
-            queryable = queryable.Where(x => x.TenantId == tenant);
+            Logger.LogDebug($"Adding filter by tenant: {tenantId}");
+            queryable = queryable.Where(x => x.TenantId == tenantId);
         }
 
         if (!String.IsNullOrEmpty(traceId))
         {
-            _logger.LogDebug($"Adding filter by trace id: {traceId}");
+            Logger.LogDebug($"Adding filter by trace id: {traceId}");
             queryable = queryable.Where(x => x.TraceId == traceId);
         }
 
         if (!String.IsNullOrEmpty(spanId))
         {
-            _logger.LogDebug($"Adding filter by span id: {spanId}");
+            Logger.LogDebug($"Adding filter by span id: {spanId}");
             queryable = queryable.Where(x => x.SpanId == spanId);
         }
 
         if (dateTimeFrom.HasValue)
         {
-            _logger.LogDebug($"Adding filter by timestamp: {dateTimeFrom.Value.ToUniversalTime()}");
+            Logger.LogDebug($"Adding filter by timestamp: {dateTimeFrom.Value.ToUniversalTime()}");
             queryable = queryable.Where(x => x.Timestamp >= dateTimeFrom.Value.ToUniversalTime());
         }
 
         if (dateTimeTo.HasValue)
         {
-            _logger.LogDebug($"Adding filter by timestamp: {dateTimeTo.Value.ToUniversalTime()}");
+            Logger.LogDebug($"Adding filter by timestamp: {dateTimeTo.Value.ToUniversalTime()}");
             queryable = queryable.Where(x => x.Timestamp <= dateTimeTo.Value.ToUniversalTime());
         }
 
         if (clientIpAddress != null)
         {
-            _logger.LogDebug($"Adding filter by client ip address: {clientIpAddress}");
+            Logger.LogDebug($"Adding filter by client ip address: {clientIpAddress}");
             queryable = queryable.Where(x => x.ClientIpAddress == clientIpAddress.ToString());
         }
 
-        if (!String.IsNullOrEmpty(hostname))
+        if (!String.IsNullOrEmpty(hostName))
         {
-            _logger.LogDebug($"Adding filter by hostname: {hostname}");
-            queryable = queryable.Where(x => x.HostName == hostname);
+            Logger.LogDebug($"Adding filter by hostname: {hostName}");
+            queryable = queryable.Where(x => x.HostName == hostName);
         }
 
         if (!String.IsNullOrEmpty(appName))
         {
-            _logger.LogDebug($"Adding filter by application name: {appName}");
+            Logger.LogDebug($"Adding filter by application name: {appName}");
             queryable = queryable.Where(x => x.AppName == appName);
         }
 
@@ -130,61 +143,46 @@ public sealed class DependenciesService : BaseDeepSightService, IDependenciesSer
 
         if (durationFrom.HasValue)
         {
-            _logger.LogDebug($"Adding filter by duration: {durationFrom}");
+            Logger.LogDebug($"Adding filter by duration: {durationFrom}");
             queryable = queryable.Where(x => x.Duration >= durationFrom);
         }
 
         if (durationTo.HasValue)
         {
-            _logger.LogDebug($"Adding filter by duration: {durationTo}");
+            Logger.LogDebug($"Adding filter by duration: {durationTo}");
             queryable = queryable.Where(x => x.Duration <= durationTo);
         }
 
         if (!String.IsNullOrEmpty(name))
         {
-            _logger.LogDebug($"Adding filter by name: {name}");
+            Logger.LogDebug($"Adding filter by name: {name}");
             queryable = queryable.Where(x => x.Name == name);
         }
 
         if (!String.IsNullOrEmpty(type))
         {
-            _logger.LogDebug($"Adding filter by type: {type}");
+            Logger.LogDebug($"Adding filter by type: {type}");
             queryable = queryable.Where(x => x.Type == type);
         }
 
         if (success.HasValue)
         {
-            _logger.LogDebug($"Adding filter by result: {success}");
+            Logger.LogDebug($"Adding filter by result: {success}");
             queryable = queryable.Where(x => x.Success == success);
         }
 
         if (!String.IsNullOrEmpty(target))
         {
-            _logger.LogDebug($"Adding filter by target: {target}");
+            Logger.LogDebug($"Adding filter by target: {target}");
             queryable = queryable.Where(x => x.Target == target);
         }
 
-        _logger.LogDebug("Executing query to retrieve dependencies from repository");
+        Logger.LogDebug("Executing query to retrieve dependencies from database");
         var listOfEntities = await queryable.OrderByDescending(x => x.Timestamp)
                                             .ToListAsync(cancellationToken)
                                             .ConfigureAwait(false);
-        _logger.LogDebug($"{listOfEntities.Count} dependencies was retrieved from the repository");
+        Logger.LogDebug($"{listOfEntities.Count} dependencies was retrieved from the database");
 
-        return [.. listOfEntities.Select(x => x.ToDependencyDto())];
-    }
-    public override async Task<Guid> PublishAsync(DeepSightDto deepSightDto,
-                                                  CancellationToken cancellationToken = default)
-    {
-        if (_dependenciesPublisher == null)
-        {
-            throw new NotSupportedException("The dependencies publisher is not currently available");
-        }
-
-        _logger.LogDebug("Publishing a new dependency message");
-        var messageId = await _dependenciesPublisher.PublishAsync(deepSightDto, "dependencies", cancellationToken)
-                                                    .ConfigureAwait(false);
-        _logger.LogDebug($"The id of the published message is {messageId}");
-
-        return messageId;
+        return [.. listOfEntities.Select(x => x.Build())];
     }
 }

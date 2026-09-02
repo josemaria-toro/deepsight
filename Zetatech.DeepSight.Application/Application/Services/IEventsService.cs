@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Zetatech.Accelerate.Application;
 using Zetatech.DeepSight.Application.Dtos;
 
 namespace Zetatech.DeepSight.Application.Services;
 
-public interface IEventsService : IDeepSightService
+public interface IEventsService : IService
 {
     Task<Guid> CreateAsync(EventDto eventDto, CancellationToken cancellationToken = default);
+    Task DeleteAsync(UInt32 daysToKeep, CancellationToken cancellationToken = default);
     Task<IList<EventDto>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<Guid> PublishAsync(EventDto eventDto, CancellationToken cancellationToken = default);
     Task<IList<EventDto>> SearchAsync(String appName = null,

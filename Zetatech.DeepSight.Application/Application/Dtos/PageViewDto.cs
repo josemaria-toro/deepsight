@@ -7,6 +7,6 @@ public sealed record PageViewDto : BaseDeepSightDto
 {
     public String DeviceType { get; set; }
     public String Name { get; set; }
-    public Uri Url { get; set; }
+    public String Url { get; set; }
     public String UserAgent { get; set; }
 }

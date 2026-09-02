@@ -4,13 +4,15 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Zetatech.Accelerate.Application;
 using Zetatech.DeepSight.Application.Dtos;
 
 namespace Zetatech.DeepSight.Application.Services;
 
-public interface ITracesService : IDeepSightService
+public interface ITracesService : IService
 {
     Task<Guid> CreateAsync(TraceDto traceDto, CancellationToken cancellationToken = default);
+    Task DeleteAsync(UInt32 daysToKeep, CancellationToken cancellationToken = default);
     Task<IList<TraceDto>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<Guid> PublishAsync(TraceDto traceDto, CancellationToken cancellationToken = default);
     Task<IList<TraceDto>> SearchAsync(String appName = null,
