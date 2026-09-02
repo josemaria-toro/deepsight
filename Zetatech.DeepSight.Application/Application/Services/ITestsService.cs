@@ -20,6 +20,8 @@ public interface ITestsService : IDeepSightService
                                               Double? durationTo = null,
                                               String message = null,
                                               String name = null,
+                                              String spanId = null,
                                               Boolean? success = null,
+                                              String traceId = null,
                                               CancellationToken cancellationToken = default);
 }

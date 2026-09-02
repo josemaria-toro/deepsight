@@ -16,22 +16,31 @@ public abstract class BaseDeepSightEntity : BaseEntity
     [Column("c_str_app_version")]
     public String AppVersion { get; set; }
     [Required]
-    [MaxLength(15)]
+    [MaxLength(64)]
     [Column("c_str_client_ip_address")]
     public String ClientIpAddress { get; set; }
     [Required]
     [MaxLength(32)]
     [Column("c_str_client_version")]
     public String ClientVersion { get; set; }
+    [Required]
     [MaxLength(128)]
     [Column("c_str_host_name")]
     public String HostName { get; set; }
     [Column("c_jsn_metadata", TypeName = "jsonb")]
     public String Metadata { get; set; }
     [Required]
+    [MaxLength(16)]
+    [Column("c_str_span_id")]
+    public String SpanId { get; set; }
+    [Required]
     [Column("c_uid_tenant_id")]
     public Guid TenantId { get; set; }
     [Required]
     [Column("c_tsp_timestamp")]
     public DateTime Timestamp { get; set; }
+    [Required]
+    [MaxLength(32)]
+    [Column("c_str_trace_id")]
+    public String TraceId { get; set; }
 }

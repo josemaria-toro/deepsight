@@ -6,11 +6,11 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteRequestsJob : BaseTimerJob
+public sealed class RemoveObsoleteRequestsJob : BasePeriodicJob
 {
     private readonly IRequestsService _requestsService;
 
-    public RemoveObsoleteRequestsJob(IRequestsService requestsService) : base(TimeSpan.FromDays(1))
+    public RemoveObsoleteRequestsJob(IRequestsService requestsService) : base(TimeSpan.FromHours(1), true)
     {
         _requestsService = requestsService ?? throw new ArgumentException("The provided requests service must be a valid instance", nameof(requestsService));
     }

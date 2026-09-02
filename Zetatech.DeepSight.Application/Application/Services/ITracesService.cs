@@ -20,5 +20,7 @@ public interface ITracesService : IDeepSightService
                                                String category = null,
                                                String message = null,
                                                LogLevel? severity = null,
+                                               String spanId = null,
+                                               String traceId = null,
                                                CancellationToken cancellationToken = default);
 }

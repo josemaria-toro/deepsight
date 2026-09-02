@@ -19,8 +19,10 @@ public interface IDependenciesService : IDeepSightService
                                                     Double? durationFrom = null,
                                                     Double? durationTo = null,
                                                     String name = null,
+                                                    String spanId = null,
                                                     Boolean? success = null,
                                                     String target = null,
+                                                    String traceId = null,
                                                     String type = null,
                                                     CancellationToken cancellationToken = default);
 }

@@ -17,5 +17,7 @@ public interface IEventsService : IDeepSightService
                                                DateTime? dateTimeFrom = null,
                                                DateTime? dateTimeTo = null,
                                                String name = null,
+                                               String spanId = null,
+                                               String traceId = null,
                                                CancellationToken cancellationToken = default);
 }

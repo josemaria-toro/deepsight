@@ -17,8 +17,10 @@ public static class PageViewBuilder
             DeviceType = pageViewEntity.DeviceType,
             HostName = pageViewEntity.HostName,
             Name = pageViewEntity.Name,
+            SpanId = pageViewEntity.SpanId,
             TenantId = pageViewEntity.TenantId,
             Timestamp = pageViewEntity.Timestamp,
+            TraceId = pageViewEntity.TraceId,
             UserAgent = pageViewEntity.UserAgent
         };
 

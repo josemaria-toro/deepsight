@@ -54,6 +54,6 @@
         <Optimize>true</Optimize>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Zetatech.Accelerate" Version="10.2609.0-preview2" />
+        <PackageReference Include="Zetatech.Accelerate" Version="10.2609.2" />
     </ItemGroup>
 </Project>

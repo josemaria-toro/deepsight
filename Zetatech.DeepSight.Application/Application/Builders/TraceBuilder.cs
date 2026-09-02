@@ -18,8 +18,10 @@ public static class TraceDtoBuilder
             Category = traceEntity.Category,
             HostName = traceEntity.HostName,
             Message = traceEntity.Message,
+            SpanId = traceEntity.SpanId,
             TenantId = traceEntity.TenantId,
-            Timestamp = traceEntity.Timestamp
+            Timestamp = traceEntity.Timestamp,
+            TraceId = traceEntity.TraceId
         };
 
         if (Version.TryParse(traceEntity.AppVersion, out var appVersion))

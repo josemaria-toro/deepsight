@@ -20,10 +20,12 @@ public static class DependencyBuilder
             Duration = dependencyEntity.Duration,
             HostName = dependencyEntity.HostName,
             Name = dependencyEntity.Name,
+            SpanId = dependencyEntity.SpanId,
             Success = dependencyEntity.Success,
             Target = dependencyEntity.Target,
             TenantId = dependencyEntity.TenantId,
             Timestamp = dependencyEntity.Timestamp,
+            TraceId = dependencyEntity.TraceId,
             Type = dependencyEntity.Type
         };
 
@@ -55,8 +57,10 @@ public static class DependencyBuilder
         {
             AppName = deepSightDto.AppName,
             HostName = deepSightDto.HostName,
+            SpanId = deepSightDto.SpanId,
             TenantId = deepSightDto.TenantId,
-            Timestamp = deepSightDto.Timestamp
+            Timestamp = deepSightDto.Timestamp,
+            TraceId = deepSightDto.TraceId
         };
 
         if (deepSightDto.AppVersion != null)

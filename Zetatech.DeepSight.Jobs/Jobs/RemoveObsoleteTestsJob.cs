@@ -6,11 +6,11 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteTestsJob : BaseTimerJob
+public sealed class RemoveObsoleteTestsJob : BasePeriodicJob
 {
     private readonly ITestsService _testsService;
 
-    public RemoveObsoleteTestsJob(ITestsService testsService) : base(TimeSpan.FromDays(1))
+    public RemoveObsoleteTestsJob(ITestsService testsService) : base(TimeSpan.FromHours(1), true)
     {
         _testsService = testsService ?? throw new ArgumentException("The provided tests service must be a valid instance", nameof(testsService));
     }

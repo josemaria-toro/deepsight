@@ -1,8 +1,9 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
+using Zetatech.Accelerate.Serialization;
 using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Mcp.Resources;
@@ -10,20 +11,32 @@ namespace Zetatech.DeepSight.Mcp.Resources;
 [McpServerResourceType]
 public class TestsResourceHandler
 {
-    private readonly ILogger _logger;
     private readonly ITestsService _testsService;
 
-    public TestsResourceHandler(ITestsService testsService,
-                                ILoggerFactory loggerFactory)
+    public TestsResourceHandler(ITestsService testsService)
     {
-        _logger = loggerFactory.CreateLogger<TestsResourceHandler>();
         _testsService = testsService;
     }
 
-    [McpServerResource(UriTemplate = "db://tests")]
-    public async Task<String> GetAsync(CancellationToken cancellationToken = default)
+    [McpServerResource(UriTemplate = "db://tests{?appName,clientIpAddress,hostname,tenant,dateTimeFrom,dateTimeTo,durationFrom,durationTo,message,name,spanId,success,traceId}", MimeType = "application/json")]
+    public async Task<String> GetAsync(String appName = null,
+                                       IPAddress clientIpAddress = null,
+                                       String hostname = null,
+                                       Guid? tenant = null,
+                                       DateTime? dateTimeFrom = null,
+                                       DateTime? dateTimeTo = null,
+                                       Double? durationFrom = null,
+                                       Double? durationTo = null,
+                                       String message = null,
+                                       String name = null,
+                                       String spanId = null,
+                                       Boolean? success = null,
+                                       String traceId = null,
+                                       CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Se obtienen las pruebas");
-        return "Estas son tus pruebas";
+        var testDtos = await _testsService.GetUsingFiltersAsync(appName, clientIpAddress, hostname, tenant, dateTimeFrom, dateTimeTo, durationFrom, durationTo, message, name, spanId, success, traceId, cancellationToken)
+                                          .ConfigureAwait(false);
+
+        return Json.ToString(testDtos);
     }
 }

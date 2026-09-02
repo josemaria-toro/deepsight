@@ -19,9 +19,11 @@ public static class TestDtoBuilder
             HostName = testEntity.HostName,
             Message = testEntity.Message,
             Name = testEntity.Name,
+            SpanId = testEntity.SpanId,
             Success = testEntity.Success,
             TenantId = testEntity.TenantId,
-            Timestamp = testEntity.Timestamp
+            Timestamp = testEntity.Timestamp,
+            TraceId = testEntity.TraceId
         };
 
         if (Version.TryParse(testEntity.AppVersion, out var appVersion))

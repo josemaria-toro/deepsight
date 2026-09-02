@@ -6,11 +6,11 @@ using Zetatech.DeepSight.Application.Services;
 
 namespace Zetatech.DeepSight.Jobs;
 
-public sealed class RemoveObsoleteMetricsJob : BaseTimerJob
+public sealed class RemoveObsoleteMetricsJob : BasePeriodicJob
 {
     private readonly IMetricsService _metricsService;
 
-    public RemoveObsoleteMetricsJob(IMetricsService metricsService) : base(TimeSpan.FromDays(1))
+    public RemoveObsoleteMetricsJob(IMetricsService metricsService) : base(TimeSpan.FromHours(1), true)
     {
         _metricsService = metricsService ?? throw new ArgumentException("The provided metrics service must be a valid instance", nameof(metricsService));
     }
