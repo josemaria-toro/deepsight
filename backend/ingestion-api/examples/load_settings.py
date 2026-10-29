@@ -3,7 +3,7 @@
 import logging
 import os
 
-from ingestion_api.infrastructure.config.settings import Settings
+from deepsight_ingestion_api.infrastructure.config.settings import Settings
 
 
 def main() -> None:

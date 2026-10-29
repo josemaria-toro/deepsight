@@ -3,7 +3,7 @@
 import logging
 import os
 
-from analytics_api.infrastructure.config.settings import Settings
+from deepsight_analytics_api.infrastructure.config.settings import Settings
 
 
 def main() -> None:

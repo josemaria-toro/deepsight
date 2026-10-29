@@ -2,7 +2,7 @@
 
 from fastapi.testclient import TestClient
 
-from ingestion_api.interfaces.api.app import create_app
+from deepsight_ingestion_api.interfaces.api.app import create_app
 
 
 def test_health_returns_ok() -> None:

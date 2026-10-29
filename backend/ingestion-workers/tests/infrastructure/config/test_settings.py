@@ -2,7 +2,7 @@
 
 import pytest
 
-from ingestion_workers.infrastructure.config.settings import Settings
+from deepsight_ingestion_workers.infrastructure.config.settings import Settings
 
 VALID_ENV = {"RABBITMQ_URL": "value-rabbitmq_url", "DATABASE_URL": "value-database_url"}
 

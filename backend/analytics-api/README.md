@@ -22,7 +22,7 @@ uv run pre-commit install --config ../../.pre-commit-config.yaml
 
 ```bash
 export DATABASE_URL=<valor>
-uv run uvicorn --factory analytics_api.interfaces.api.app:create_app --reload
+uv run uvicorn --factory deepsight_analytics_api.interfaces.api.app:create_app --reload
 ```
 
 La API queda disponible en `http://localhost:8000/api/v1/health`.
