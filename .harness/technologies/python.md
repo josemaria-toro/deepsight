@@ -67,6 +67,7 @@ Cualquier tecnología que no aparezca en esta lista requiere aprobación previa 
 | Tecnología | Uso |
 |---|---|
 | `FastAPI` | Framework para APIs HTTP. |
+| `uvicorn` | Servidor ASGI para ejecutar las APIs FastAPI. |
 | `httpx` | Cliente HTTP con verificación TLS activa. |
 
 ## Logging y configuración

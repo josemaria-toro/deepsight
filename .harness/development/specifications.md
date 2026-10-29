@@ -62,6 +62,6 @@ La fase de exploración (`/opsx:explore`) es opcional y se puede usar antes de `
 
 ## Relación con otras guías
 
-- Ramas y PR: [git.md](git.md). Las ramas de un cambio siguen el formato `feature/<id-cambio>` o `fix/<id-cambio>`.
+- Ramas y PR: [git.md](git.md). Las ramas de un cambio siguen el formato `feature/<n-ticket>-<id-cambio>` o `fix/<n-ticket>-<id-cambio>`.
 - Documentación de proyectos: [../documentation/projects.md](../documentation/projects.md). La carpeta `openspec/` se documenta en el `README.md` del proyecto.
 - Tecnologías admitidas: [../technologies/python.md](../technologies/python.md) y [../technologies/react.md](../technologies/react.md).

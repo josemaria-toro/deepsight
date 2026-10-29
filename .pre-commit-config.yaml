@@ -1,0 +1,75 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ingestion-api-black
+        name: ingestion-api black
+        entry: bash -c 'cd backend/ingestion-api && uv run black .'
+        language: system
+        pass_filenames: false
+        files: ^backend/ingestion-api/
+      - id: ingestion-api-ruff
+        name: ingestion-api ruff
+        entry: bash -c 'cd backend/ingestion-api && uv run ruff check .'
+        language: system
+        pass_filenames: false
+        files: ^backend/ingestion-api/
+      - id: ingestion-api-mypy
+        name: ingestion-api mypy
+        entry: bash -c 'cd backend/ingestion-api && uv run mypy'
+        language: system
+        pass_filenames: false
+        files: ^backend/ingestion-api/
+      - id: ingestion-workers-black
+        name: ingestion-workers black
+        entry: bash -c 'cd backend/ingestion-workers && uv run black .'
+        language: system
+        pass_filenames: false
+        files: ^backend/ingestion-workers/
+      - id: ingestion-workers-ruff
+        name: ingestion-workers ruff
+        entry: bash -c 'cd backend/ingestion-workers && uv run ruff check .'
+        language: system
+        pass_filenames: false
+        files: ^backend/ingestion-workers/
+      - id: ingestion-workers-mypy
+        name: ingestion-workers mypy
+        entry: bash -c 'cd backend/ingestion-workers && uv run mypy'
+        language: system
+        pass_filenames: false
+        files: ^backend/ingestion-workers/
+      - id: analytics-api-black
+        name: analytics-api black
+        entry: bash -c 'cd backend/analytics-api && uv run black .'
+        language: system
+        pass_filenames: false
+        files: ^backend/analytics-api/
+      - id: analytics-api-ruff
+        name: analytics-api ruff
+        entry: bash -c 'cd backend/analytics-api && uv run ruff check .'
+        language: system
+        pass_filenames: false
+        files: ^backend/analytics-api/
+      - id: analytics-api-mypy
+        name: analytics-api mypy
+        entry: bash -c 'cd backend/analytics-api && uv run mypy'
+        language: system
+        pass_filenames: false
+        files: ^backend/analytics-api/
+      - id: analytics-portal-prettier
+        name: analytics-portal prettier
+        entry: bash -c 'cd frontend/analytics-portal && pnpm exec prettier --check .'
+        language: system
+        pass_filenames: false
+        files: ^frontend/analytics-portal/
+      - id: analytics-portal-eslint
+        name: analytics-portal eslint
+        entry: bash -c 'cd frontend/analytics-portal && pnpm exec eslint .'
+        language: system
+        pass_filenames: false
+        files: ^frontend/analytics-portal/
+      - id: analytics-portal-tsc
+        name: analytics-portal tsc
+        entry: bash -c 'cd frontend/analytics-portal && pnpm exec tsc --noEmit'
+        language: system
+        pass_filenames: false
+        files: ^frontend/analytics-portal/

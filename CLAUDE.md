@@ -1,6 +1,6 @@
 # Instrucciones para Claude
 
-Este repositorio es Spec Driven Development, un repositorio que sirve como plantilla para crear aplicaciones utilizando agentes de inteligencia artificial, siguiendo el estandar Spec Driven Development.
+Este repositorio contiene DeepSight, una plataforma de observabilidad formada por cuatro proyectos: `ingestion-api`, `ingestion-workers`, `analytics-api` y `analytics-portal`. Se desarrolla con agentes de inteligencia artificial siguiendo el estándar Spec Driven Development. Las tecnologías base son PostgreSQL, RabbitMQ, Python y React.
 
 ## Guías obligatorias
 
@@ -34,7 +34,8 @@ Si una tecnología no aparece en la guía de tecnologías admitidas, no la uses.
 ## Git
 
 - `main` es la única rama permanente. No hagas commits directos en `main`.
-- Crea ramas de trabajo desde `main` con el formato `<tipo>/<descripción-corta>`, con la descripción en inglés (`feature/`, `fix/`, `docs/`, `refactor/`, `chore/`).
+- Crea ramas de trabajo desde `main` con el formato `<tipo>/<n-ticket>-<descripción-corta>`, con la descripción en inglés (`feature/`, `fix/`, `docs/`, `refactor/`, `chore/`).
+- **Tickets**: toda rama y todo PR se asocian a un ticket (issue de GitHub), cuyo contenido es la fuente de la tarea. La descripción del PR incluye `Closes #<n-ticket>` para que el ticket se cierre al hacer merge, y si sigue abierto tras el merge, se cierra con un comentario que enlace al PR. Detalle en `.harness/development/git.md`.
 - Los cambios entran en `main` mediante PR, con merge por squash. El título del PR va en inglés y se corresponde con el título de la especificación de OpenSpec. La descripción del PR también va en inglés, sin datos del agente utilizado (`Co-Authored-By`, `Generated with`, etc.), con el listado de cambios coherente, claro y conciso, en una única lista sin separar por commit.
 - Los commits usan la identidad configurada en git. No cambies el autor de los commits.
 
@@ -89,7 +90,7 @@ Para todos los proyectos, pide las tecnologías al usuario, aunque el scaffoldin
 
 ### 7. Scaffolding
 
-- Trabaja en una rama `chore/scaffolding-inicial` creada desde `main`. No hagas commits directos en `main`.
+- Trabaja en una rama `chore/<n-ticket>-scaffolding-inicial` creada desde `main`, asociada al ticket que describe el scaffolding (si no existe, créalo antes). No hagas commits directos en `main`.
 - Crea la estructura de cada proyecto siguiendo sus guías. Incluye la configuración de herramientas (formateo, linter, tipos, pruebas con cobertura mínima del 80 %, pre-commit), el `README.md` según [la guía de documentación de proyectos](.harness/documentation/projects.md) y un `.gitignore` acorde a la tecnología.
 - Incluye al menos una prueba de humo por proyecto, para que las comprobaciones se puedan ejecutar desde el primer momento.
 - No crees código de negocio. El scaffolding solo contiene la estructura, la configuración y los ejemplos mínimos necesarios.
