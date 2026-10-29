@@ -1,0 +1,29 @@
+name: Funcionalidad
+description: Propuesta de una nueva funcionalidad para la plataforma
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe la funcionalidad desde el punto de vista funcional.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción funcional del cambio
+      description: Qué problema resuelve, qué comportamiento se espera y para quién.
+      placeholder: Describe el cambio desde el punto de vista del usuario.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Criterios de aceptación
+      description: Lista verificable de condiciones que deben cumplirse para dar la funcionalidad por terminada.
+      placeholder: |
+        - [ ] Dado ..., cuando ..., entonces ...
+        - [ ] ...
+    validations:
+      required: true

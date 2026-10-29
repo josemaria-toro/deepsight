@@ -1,0 +1,53 @@
+name: Error
+description: Notificación de un error o comportamiento incorrecto en la plataforma
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe el error con el mayor detalle posible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del error
+      description: Qué ocurre, qué se esperaba que ocurriera y cuál es el impacto.
+      placeholder: Describe el comportamiento observado y el esperado.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Entorno
+      description: Entorno en el que se ha producido el error.
+      options:
+        - Development
+        - Pre-Release
+        - Production
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      description: Secuencia exacta de acciones que provoca el error.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Criterios de aceptación
+      description: Lista verificable de condiciones que deben cumplirse para dar el error por resuelto.
+      placeholder: |
+        - [ ] Dado ..., cuando ..., entonces ...
+        - [ ] ...
+    validations:
+      required: true

@@ -1,0 +1,29 @@
+name: Cambio
+description: Propuesta de un cambio sobre el comportamiento existente de la plataforma
+title: "[Change] "
+labels: ["change"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe el cambio desde el punto de vista funcional.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción funcional del cambio
+      description: Qué problema resuelve, qué comportamiento se espera y para quién.
+      placeholder: Describe el cambio desde el punto de vista del usuario.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Criterios de aceptación
+      description: Lista verificable de condiciones que deben cumplirse para dar el cambio por terminado.
+      placeholder: |
+        - [ ] Dado ..., cuando ..., entonces ...
+        - [ ] ...
+    validations:
+      required: true

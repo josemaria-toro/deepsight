@@ -1,0 +1,10 @@
+# Propietarios de código: se solicita su revisión en cada Pull Request.
+# Formato: https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Por defecto, todo el repositorio.
+*                       @josemaria-toro
+
+# Especificaciones y guías obligatorias.
+/openspec/              @josemaria-toro
+/.harness/              @josemaria-toro
+/CLAUDE.md              @josemaria-toro
