@@ -2,7 +2,7 @@
 
 import pytest
 
-from deepsight_analytics_api.infrastructure.config.settings import Settings
+from deepsight.infrastructure.config.settings import Settings
 
 VALID_ENV = {"DATABASE_URL": "value-database_url"}
 

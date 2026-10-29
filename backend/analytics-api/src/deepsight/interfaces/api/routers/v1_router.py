@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from deepsight_analytics_api.interfaces.api.schemas.health_response import HealthResponse
+from deepsight.interfaces.api.schemas.health_response import HealthResponse
 
 v1_router = APIRouter(prefix="/api/v1")
 

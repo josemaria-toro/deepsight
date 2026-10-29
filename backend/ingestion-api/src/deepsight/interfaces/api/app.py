@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 
-from deepsight_ingestion_api.interfaces.api.routers.v1_router import v1_router
+from deepsight.interfaces.api.routers.v1_router import v1_router
 
 
 def create_app() -> FastAPI:

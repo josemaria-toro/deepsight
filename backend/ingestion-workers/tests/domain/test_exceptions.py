@@ -2,7 +2,7 @@
 
 import pytest
 
-from deepsight_ingestion_workers.domain.exceptions import DomainError
+from deepsight.domain.exceptions import DomainError
 
 
 def test_domain_error_is_an_exception() -> None:

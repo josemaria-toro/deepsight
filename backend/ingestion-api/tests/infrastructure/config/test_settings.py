@@ -2,7 +2,7 @@
 
 import pytest
 
-from deepsight_ingestion_api.infrastructure.config.settings import Settings
+from deepsight.infrastructure.config.settings import Settings
 
 VALID_ENV = {"RABBITMQ_URL": "value-rabbitmq_url"}
 

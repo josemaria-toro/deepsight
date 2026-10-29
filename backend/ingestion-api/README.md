@@ -22,7 +22,7 @@ uv run pre-commit install --config ../../.pre-commit-config.yaml
 
 ```bash
 export RABBITMQ_URL=<valor>
-uv run uvicorn --factory deepsight_ingestion_api.interfaces.api.app:create_app --reload
+uv run uvicorn --factory deepsight.interfaces.api.app:create_app --reload
 ```
 
 La API queda disponible en `http://localhost:8000/api/v1/health`.

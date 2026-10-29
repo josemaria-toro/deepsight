@@ -1,5 +1,5 @@
 [project]
-name = "deepsight-ingestion-api"
+name = "ingestion-api"
 version = "0.1.0"
 description = "API pública para la ingesta de datos de observabilidad."
 readme = "README.md"
@@ -31,7 +31,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/deepsight_ingestion_api"]
+packages = ["src/deepsight"]
 
 [tool.black]
 line-length = 100
@@ -49,7 +49,7 @@ select = ["E", "F", "W", "I", "B", "UP", "TID252", "S"]
 "tests/**" = ["S101"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["deepsight_ingestion_api"]
+known-first-party = ["deepsight"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -58,15 +58,15 @@ ban-relative-imports = "all"
 strict = true
 python_version = "3.13"
 mypy_path = "src"
-packages = ["deepsight_ingestion_api"]
+packages = ["deepsight"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
-addopts = "--cov=deepsight_ingestion_api --cov-report=term-missing --cov-fail-under=80"
+addopts = "--cov=deepsight --cov-report=term-missing --cov-fail-under=80"
 markers = ["integration: pruebas de integración que usan servicios reales (base de datos, broker)"]
 pythonpath = ["src"]
 
 [tool.coverage.run]
 branch = true
-source = ["deepsight_ingestion_api"]
+source = ["deepsight"]
