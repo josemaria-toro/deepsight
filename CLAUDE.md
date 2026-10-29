@@ -90,7 +90,7 @@ Para todos los proyectos, pide las tecnologías al usuario, aunque el scaffoldin
 
 ### 7. Scaffolding
 
-- Trabaja en una rama `chore/scaffolding-inicial` creada desde `main`. No hagas commits directos en `main`.
+- Trabaja en una rama `chore/<n-ticket>-scaffolding-inicial` creada desde `main`, asociada al ticket que describe el scaffolding (si no existe, créalo antes). No hagas commits directos en `main`.
 - Crea la estructura de cada proyecto siguiendo sus guías. Incluye la configuración de herramientas (formateo, linter, tipos, pruebas con cobertura mínima del 80 %, pre-commit), el `README.md` según [la guía de documentación de proyectos](.harness/documentation/projects.md) y un `.gitignore` acorde a la tecnología.
 - Incluye al menos una prueba de humo por proyecto, para que las comprobaciones se puedan ejecutar desde el primer momento.
 - No crees código de negocio. El scaffolding solo contiene la estructura, la configuración y los ejemplos mínimos necesarios.
