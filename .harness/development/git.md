@@ -21,16 +21,25 @@ feature/fix/docs/refactor/chore → main
 ## Ramas de trabajo
 
 - Cada tarea se desarrolla en una rama corta creada a partir de `main`.
-- Nombre de las ramas: `<tipo>/<descripción-corta>`, en inglés, en minúsculas y separadas por guiones.
+- Nombre de las ramas: `<tipo>/<n-ticket>-<descripción-corta>`, en inglés, en minúsculas y separadas por guiones, donde `<n-ticket>` es el número del ticket asociado.
   - Tipos: `feature/`, `fix/`, `docs/`, `refactor/`, `chore/`.
-  - Ejemplos: `feature/oauth-login`, `fix/crash-on-save`.
+  - Ejemplos: `feature/12-oauth-login`, `fix/27-crash-on-save`.
 - Las correcciones urgentes siguen el mismo flujo con una rama `fix/`.
 - Las ramas deben ser cortas: se integran en `main` lo antes posible y se eliminan tras el merge.
 - Antes de abrir el PR, la rama se actualiza con los últimos cambios de `main`.
 
+## Tickets
+
+- Todo el trabajo parte de un ticket (issue de GitHub) y su contenido es la fuente de la tarea. Si no existe ticket, se crea antes de empezar.
+- Cada rama de trabajo se asocia a un único ticket, cuyo número va en el nombre de la rama.
+- Cada PR se asocia al ticket de su rama. La descripción del PR incluye una palabra de cierre de GitHub con el ticket (`Closes #<n-ticket>`) para que el ticket quede cerrado automáticamente al hacer merge.
+- Un ticket solo se da por completado cuando su PR se ha integrado en `main`. Si al hacer merge el ticket sigue abierto, se cierra manualmente con un comentario que enlace al PR.
+- Si el trabajo de un ticket se divide en varios PR, solo el último incluye la palabra de cierre. Los anteriores lo referencian con `Refs #<n-ticket>`.
+
 ## Pull Requests
 
 - El título del PR se escribe en inglés y se corresponde con el título de la especificación de OpenSpec que implementa el cambio.
+- Cada PR referencia su ticket en la descripción (ver [Tickets](#tickets)).
 - Cada PR debe tener una descripción clara del cambio y su motivo, escrita en inglés.
 - La descripción del PR no incluye datos del agente de IA utilizado: ni `Co-Authored-By`, ni `Generated with`, ni enlaces o menciones a herramientas o modelos.
 - El listado de cambios de la descripción es coherente, claro y conciso. Se redacta como una única lista de viñetas sobre el resultado global del PR, sin separarla por commit.
