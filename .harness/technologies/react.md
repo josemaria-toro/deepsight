@@ -40,6 +40,7 @@ Cualquier tecnología que no aparezca en esta lista requiere aprobación previa 
 |---|---|
 | `vitest` | Framework de pruebas unitarias y de componentes. |
 | `@testing-library/react` | Pruebas de componentes centradas en el comportamiento visible. |
+| `jsdom` | Entorno DOM de `vitest` para las pruebas de componentes. |
 | `playwright` | Pruebas de integración y end-to-end. |
 | `Docker` | Ejecución efímera de las pruebas y de los servicios que necesitan. Es una herramienta de desarrollo, no una dependencia de ejecución del proyecto. |
 

@@ -1,6 +1,15 @@
-# spec-driven-development
+# DeepSight
 
-Repositorio plantilla para crear aplicaciones utilizando agentes de inteligencia artificial, siguiendo el estándar Spec Driven Development.
+DeepSight es una plataforma de observabilidad. Se desarrolla con agentes de inteligencia artificial siguiendo el estándar Spec Driven Development y consta de los siguientes proyectos:
+
+| Proyecto | Ubicación | Descripción |
+|---|---|---|
+| `ingestion-api` | `backend/ingestion-api/` | API pública para la ingesta de datos. |
+| `ingestion-workers` | `backend/ingestion-workers/` | Procesa los mensajes publicados por la API de ingesta. |
+| `analytics-api` | `backend/analytics-api/` | API pública que actúa como backend del portal analítico. |
+| `analytics-portal` | `frontend/analytics-portal/` | Portal web para visualizar los datos de forma estructurada, con gráficos en tiempo real y filtros. |
+
+Tecnologías: PostgreSQL como base de datos, RabbitMQ como broker de mensajería, Python (backend) y React (frontend).
 
 ## Herramientas de desarrollo
 
@@ -21,11 +30,17 @@ Repositorio plantilla para crear aplicaciones utilizando agentes de inteligencia
 │   ├── licenses/         # Licencias por lenguaje
 │   ├── security/         # Seguridad por lenguaje
 │   └── technologies/     # Tecnologías admitidas por lenguaje
+├── backend/          # Proyectos Python: ingestion-api, ingestion-workers y analytics-api
 ├── CLAUDE.md         # Instrucciones para Claude Code
+├── frontend/         # Proyectos React: analytics-portal
 ├── LICENSE
 ├── openspec/         # Especificaciones: specs/ (vigentes) y changes/ (en curso y archivados)
 └── README.md
 ```
+
+## Calidad de código
+
+Los hooks de `pre-commit` de todos los proyectos se definen en `.pre-commit-config.yaml` (raíz). Se instalan con `pre-commit install`.
 
 ## Despliegues
 

@@ -1,6 +1,6 @@
 # Instrucciones para Claude
 
-Este repositorio es Spec Driven Development, un repositorio que sirve como plantilla para crear aplicaciones utilizando agentes de inteligencia artificial, siguiendo el estandar Spec Driven Development.
+Este repositorio contiene DeepSight, una plataforma de observabilidad formada por cuatro proyectos: `ingestion-api`, `ingestion-workers`, `analytics-api` y `analytics-portal`. Se desarrolla con agentes de inteligencia artificial siguiendo el estándar Spec Driven Development. Las tecnologías base son PostgreSQL, RabbitMQ, Python y React.
 
 ## Guías obligatorias
 
