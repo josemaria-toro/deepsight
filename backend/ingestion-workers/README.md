@@ -36,7 +36,7 @@ El proceso consumidor de mensajes se añadirá con las primeras especificaciones
 # Pruebas en local, con cobertura mínima del 80 %
 uv run pytest
 
-# Solo pruebas de integración
+# Solo pruebas de integración (arrancan un PostgreSQL efímero con Docker)
 uv run pytest -m integration
 
 # Comprobaciones de calidad
@@ -46,6 +46,15 @@ uv run mypy
 ```
 
 Todavía no hay pruebas end-to-end en este proyecto.
+
+## Migraciones
+
+```bash
+uv run alembic upgrade head
+uv run alembic downgrade base
+```
+
+Requieren la variable de entorno `DATABASE_URL`.
 
 ## Configuración
 
